@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="er_plan_view_form" model="ir.ui.view">
+    <field name="name">er.plan.estado.resultados.view.form</field>
+    <field name="model">er.plan.estado.resultados</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Plan Estado de Resultados">
+        <group>
+          <group>
+            <field name="plan"/>
+            <!--<field name="name" attrs="{'required':[('plan','=','VENTAS')]}"/> <field name="brand_id" attrs="{'required':[('plan','=','VENTAS')]}"/>-->
+            <field name="name"/>
+            <field name="brand_id"/>
+            <field name="value"/>
+            <field name="year"/>
+          </group>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="er_plan_view_tree" model="ir.ui.view">
+    <field name="name">er.plan.estado.resultados.view.tree</field>
+    <field name="model">er.plan.estado.resultados</field>
+    <field name="arch" type="xml">
+      <tree string="Plan Estado de Resultados">
+        <field name="plan"/>
+        <field name="name"/>
+        <field name="brand_id"/>
+        <field name="year"/>
+        <field name="value"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="er_plan_estado_resultados_action" model="ir.actions.act_window">
+    <field name="name">Plan Estado de Resultados</field>
+    <field name="res_model">er.plan.estado.resultados</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Click to set a new value of a plan.</p>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="plan_search_view">
+    <field name="name">plan.search</field>
+    <field name="model">er.plan.estado.resultados</field>
+    <field name="arch" type="xml">
+      <search>
+        <group string="Group By">
+          <filter name="Mes" string="Mes" context="{'group_by': 'name'}"/>
+        </group>
+        <group string="Group By">
+          <filter name="Año" string="Año" context="{'group_by': 'year'}"/>
+        </group>
+        <group string="Group By">
+          <filter name="Plan" string="Plan" context="{'group_by': 'plan'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <menuitem id="menu_er_plan_estado_resultados" name="Plan Estado de Resultados" sequence="21" parent="account.account_reports_management_menu" action="er_plan_estado_resultados_action"/>
+</odoo>

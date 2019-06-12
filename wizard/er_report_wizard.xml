@@ -1,0 +1,39 @@
+<odoo>
+  <record model="ir.ui.view" id="er_report_wizard">
+    <field name="name">Statement Income Report</field>
+    <field name="model">er.report.wizard</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="ER Report">
+        <group>
+          <group>
+            <!-- <field name="account"/>-->
+            <field name="date_start"/>
+            <field name="date_end"/>
+          </group>
+          <field name="statement_income_data" nolabel="1" readonly="1">
+            <tree limit="10">
+              <field name="id"/>
+            </tree>
+          </field>
+        </group>
+        <footer>
+          <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+          <button name="get_pdf_report" string="Print" type="object"/>
+          <button string="Cancel" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="er_report" model="ir.actions.act_window">
+    <field name="name">ER Report</field>
+    <field name="res_model">er.report.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+
+  <menuitem id="menu_er_report_wizard" name="Statement Income Report" sequence="22" parent="account.account_reports_management_menu" action="er_report"/>
+  <!--<menuitem id="menu_er_report" name="Statement Income Resport" parent="sale.menu_sale_report" action="er_report"/>-->
+
+</odoo>
