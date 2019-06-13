@@ -1290,15 +1290,18 @@ class ErReportWizard(models.TransientModel):
 
     @api.multi
     def get_pdf_report(self):
-        data = {
-            'ids': self.ids,
-            'model': self._name,
-            'form': {
-                'date_start': self.date_start,
-                'date_end': self.date_end,
-            },
-        }
-        return self.env.ref('ER_report.action_statement_report_pdf').report_action(self, data=data)
+        report = self.env['ir.actions.report']._get_report_from_name(
+            'ER_report.action_statement_report_pdf')
+        return report.report_action(self)
+        # data = {
+        #     'ids': self.ids,
+        #     'model': self._name,
+        #     'form': {
+        #         'date_start': self.date_start,
+        #         'date_end': self.date_end,
+        #     },
+        # }
+        # return self.env.ref('ER_report.action_statement_report_pdf').report_action(self, data=data)
 
 
 class StatementIncomeDetail(models.TransientModel):
