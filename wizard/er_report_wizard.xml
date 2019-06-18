@@ -19,8 +19,7 @@
         </group>
         <footer>
           <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
-          <button name="get_pdf_report" string="Print" type="object"/>
-          <button string="Cancel" special="cancel"/>
+          <!--<button name="get_pdf_report" string="Print" type="object"/> <button string="Cancel" special="cancel"/>-->
         </footer>
       </form>
     </field>
