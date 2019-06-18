@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <report id="action_statement_report_pdf" model="er.report.wizard" string="ER Report" report_type="qweb-pdf" name="ER_report.statement_report_pdf" file="ER_report.statement_report_pdf"/>
-    <!--<record id="action_statement_report_pdf" model="ir.actions.report"> <field name="name">ER Report</field> <field name="model">er.report.wizard</field> <field name="report_type">qweb-pdf</field> <field
-    name="report_name">ER_report.statement_report_pdf</field> </record>-->
-  </data>
+  <report id="print_statement_report_pdf" string="ER Report" model="er.report.wizard" report_type="qweb-pdf" name="ER_report.statement_report_pdf_template" file="ER_report.statement_report_pdf_template"/>
+
+  <record id="print_statement_report_pdf" model="ir.actions.report">
+    <field name="print_report_name">'ER Report'</field>
+  </record>
+
+  <record id="paperformat_er_report" model="report.paperformat">
+    <field name="name">ER Report</field>
+    <field name="default" eval="True"/>
+    <field name="format">A4</field>
+    <field name="page_height">0</field>
+    <field name="page_width">0</field>
+    <field name="orientation">Horizontal</field>
+    <field name="margin_top">0</field>
+    <field name="margin_bottom">0</field>
+    <field name="margin_left">0</field>
+    <field name="margin_right">0</field>
+    <field name="header_line" eval="False"/>
+    <field name="header_spacing">35</field>
+    <field name="dpi">90</field>
+  </record>
 </odoo>

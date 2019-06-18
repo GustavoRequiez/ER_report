@@ -2,17 +2,17 @@
 
 from datetime import datetime
 import logging
-from odoo import api, fields, models
+from odoo import api, fields, models, exceptions
 _logger = logging.getLogger(__name__)
 
 
-class ErReportWizard(models.TransientModel):
+class ErReportWizard(models.Model):
     _name = 'er.report.wizard'
 
     date_start = fields.Date(
-        string="Start Date", required=True, default='2019-04-01')  # default=fields.Date.today
+        string="Start Date", required=True, default=fields.Date.today)  # default=fields.Date.today
     date_end = fields.Date(
-        string="End Date", required=True, default='2019-04-30')
+        string="End Date", required=True, default=fields.Date.today)
 
     statement_income_data = fields.One2many(
         'statement.income.detail',
@@ -36,7 +36,7 @@ class ErReportWizard(models.TransientModel):
 
         statement_income_data = self.env['statement.income.detail']
 
-        date_start_fisrt_day = year_full + '/01/01'
+        date_start_first_day = year_full + '/01/01'
 
         if month == '01':
             str_month = 'ENERO'
@@ -114,17 +114,17 @@ class ErReportWizard(models.TransientModel):
         ventas_netas_desviacion = ventas_netas - plan_saldo
         accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
         ventas_acumulado_credit = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         ventas_acumulado_debit = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         ventas_acumulado = round(
             (ventas_acumulado_credit - ventas_acumulado_debit), 0)
         accounts = ([6941, 6951, 6952, 6946, 6953, 6954,
                      6955, 6956, 6957, 6958, 6959])
         rebajas_credit_acumulado = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         rebajas_debit_acumulado = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         rebajas_acumulado = round(
             rebajas_debit_acumulado - rebajas_credit_acumulado, 0)
         desviacion_rebajas = ventas_acumulado - rebajas_acumulado
@@ -162,8 +162,8 @@ class ErReportWizard(models.TransientModel):
         last_year = int(year_full.strip())
         last_year = (last_year - 1)
         date_start_last_year = (str(last_year) + '/01/01')
-        date_end_last_year = (str(last_year) + '/' +
-                              str(month) + '/' + str(day))
+        date_end_last_year = (str(last_year) + '/'
+                              + str(month) + '/' + str(day))
         accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
         ventas_acumulado_credit_last_year = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
@@ -206,9 +206,9 @@ class ErReportWizard(models.TransientModel):
         accounts = ([6961, 6962, 6963, 6964, 6965, 6966, 6967, 6968,
                      6969, 6970, 6972, 6973, 6974, 6975, 6976, 6977, 6978, 6979, 6980])
         costo_venta_debit_plan_acumulado = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         costo_venta_credit_plan_acumulado = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         costo_venta_acumulado = costo_venta_debit_plan_acumulado - \
             costo_venta_credit_plan_acumulado
 
@@ -276,9 +276,9 @@ class ErReportWizard(models.TransientModel):
 
         accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         depreciacion_amortizacion_acumulado = total_debits - total_credits
         depreciacion_amortizacion_acumulado_porcentaje = (
             depreciacion_amortizacion_acumulado * 100) / desviacion_rebajas
@@ -290,9 +290,9 @@ class ErReportWizard(models.TransientModel):
                      7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
                      7053, 7054, 7055])
         gastos_operacion_debit = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         gastos_operacion_credit = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         gastos_operacion_acumulado = gastos_operacion_debit - gastos_operacion_credit
 
         gastos_operacion_acumulado += depreciacion_amortizacion_acumulado
@@ -401,16 +401,16 @@ class ErReportWizard(models.TransientModel):
         utilidad_cambiaria_saldo = perdida_cambiaria_saldo - ingresos_interes_saldo
         accounts = ([7139])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         perdida_cambiaria_acumulado = total_credits - total_debits
 
         accounts = ([7140, 7141])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         intereses_pagados_acumulado = total_credits - total_debits
 
         intereses_pagados_acumulado_porcentaje = (
@@ -437,15 +437,15 @@ class ErReportWizard(models.TransientModel):
 
         accounts = ([7143])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         ingresos_interes_acumulado = total_credits - total_debits
         accounts = ([7142])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         utilidad_cambiaria_acumulado = total_credits - total_debits
         perdida_cambiaria_acumulado_saldo = perdida_cambiaria_acumulado + \
             ingresos_interes_acumulado + utilidad_cambiaria_acumulado + \
@@ -485,7 +485,7 @@ class ErReportWizard(models.TransientModel):
             utilidad_cambiaria_plan_acumulado_saldo
         perdida_cambiaria_plan_acumulado_desviacion_porcentaje = (
             perdida_cambiaria_plan_acumulado_desviacion * 100) / perdida_cambiaria_plan_acumulado
-        ingresos_interes_plan_acumulado_desviacion_desviacion = (
+        ingresos_interes_plan_acumulado_desviacion_porcentaje = (
             ingresos_interes_plan_acumulado_desviacion * 100) / ingresos_interes_plan_acumulado
         utilidad_cambiaria_plan_acumulado_desviacion_porcentaje = (
             utilidad_cambiaria_plan_acumulado_desviacion * 100) / utilidad_cambiaria_plan_acumulado
@@ -546,15 +546,15 @@ class ErReportWizard(models.TransientModel):
             (otros_ingresos_desviacion - otros_gastos_desviacion)
         accounts = ([7144])
         total_debit = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credit = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         otros_gastos_acumulado = total_debit - total_credit
         accounts = ([6960])
         total_debit = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credit = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         otros_ingresos_acumulado = total_credit - total_debit
         utilidad_antes_impuestos_acumulado = utilidad_operacion_acumulado + \
             perdida_cambiaria_acumulado_saldo + \
@@ -605,8 +605,8 @@ class ErReportWizard(models.TransientModel):
         total_credit = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         otros_ingresos_acumulado_last_year = total_credit - total_debit
-        utilidad_antes_impuestos_plan_acumulado_last_year = utilidad_operacion_acumulado_last_year + perdida_cambiaria_acumulado_last_year_saldo + (otros_ingresos_acumulado_last_year
-                                                                                                                                                    - otros_gastos_acumulado_last_year)
+        utilidad_antes_impuestos_plan_acumulado_last_year = utilidad_operacion_acumulado_last_year + perdida_cambiaria_acumulado_last_year_saldo + (otros_ingresos_acumulado_last_year -
+                                                                                                                                                    otros_gastos_acumulado_last_year)
         otros_gastos_acumulado_last_year_porcentaje = (
             otros_gastos_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
         otros_ingresos_acumulado_last_year_porcentaje = (
@@ -636,15 +636,15 @@ class ErReportWizard(models.TransientModel):
         isr_desviacion_ptu_desviacion = isr_desviacion + ptu_desviacion
         accounts = ([7131])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         isr_acumulado = total_debits - total_credits
         accounts = ([6924])
         total_debits = get_value_debit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
-            accounts, date_start_fisrt_day, date_stop)
+            accounts, date_start_first_day, date_stop)
         ptu_acumulado = total_credits - total_debits
         isr_ptu_acumulado = isr_acumulado + ptu_acumulado
         isr_acumulado_porcentaje = (isr_acumulado * 100) / desviacion_rebajas
@@ -741,296 +741,12 @@ class ErReportWizard(models.TransientModel):
         ebitda_periodo_acumulado_last_year_porcentaje = (
             ebitda_periodo_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
 
-        print('Ventas;',
-              ventas, ';',
-              plan, ';',
-              ventas_desviacion, ';',
-              ventas_acumulado, ';',
-              ventas_acumulado_porcentaje, ';',
-              plan_acumulado, ';',
-              plan_acumulado_porcentaje, ';',
-              ventas_acumulado_desviacion, ';',
-              ventas_acumulado_desviacion_porcentaje, ';',
-              ventas_acumulado_last_year, ';',
-              ventas_acumulado_last_year_porcentaje
-              )
-        print('Rebajas;',
-              rebajas, ';',
-              plan_rebajas, ';',
-              rebajas_desviacion, ';',
-              rebajas_acumulado, ';',
-              rebajas_acumulado_procentaje, ';',
-              plan_acumulado_rebajas, ';',
-              plan_acumulado_rebajas_porcentaje, ';',
-              rebajas_acumulado_desviacion, ';',
-              rebajas_acumulado_desviacion_porcentaje, ';',
-              rebajas_acumulado_last_year, ';',
-              rebajas_acumulado_last_year_porcentaje
-              )
-        print('Ventas Netas;',
-              ventas_netas, ';',
-              plan_saldo, ';',
-              ventas_netas_desviacion, ';',
-              desviacion_rebajas, ';',
-              '100% ;',
-              plan_acumulado_saldo, ';',
-              '100% ;',
-              ventas_netas_acumulado_desviacion, ';',
-              desviacion_rebajas_desviacion_procentaje, ';',
-              rebajas_acumulado_last_year_saldo, ';',
-              '100% ;'
-              )
-        print('')
-        print('Costo de venta;',
-              costo_venta_real, ';',
-              costo_venta_plan, ';',
-              costo_venta_desviacion, ';',
-              costo_venta_acumulado, ';',
-              costo_venta_acumulado_porcentaje, ';',
-              costo_venta_plan_acumulado, ';',
-              costo_venta_plan_acumulado_porcentaje, ';',
-              costo_venta_plan_desviacion, ';',
-              costo_venta_plan_desviacion_porcentaje, ';',
-              costo_venta_last_year, ';',
-              costo_venta_last_year_porcentaje
-              )
-        print('Utilidad bruta;',
-              utilidad_bruta_real, ';',
-              utilidad_bruta_plan, ';',
-              utilidad_bruta_desviacion, ';',
-              utilidad_bruta_acumulado_saldo, ';',
-              utilidad_bruta_acumulado_saldo_porcentaje, ';',
-              utilidad_bruta_plan_saldo, ';',
-              utilidad_bruta_plan_saldo_porcentaje, ';',
-              utilidad_bruta_plan_desviacion, ';',
-              utilidad_bruta_plan_desviacion_porcentaje, ';',
-              costo_venta_last_year_saldo, ';',
-              costo_venta_last_year_saldo_porcentaje
-              )
-        print(';',
-              utilidad_porcentaje, ';',
-              utilidad_bruta_plan_procentaje
-              )
-        print('')
-        print('Gastos de operacion', ';',
-              gastos_operacion, ';',
-              gastos_operacion_plan, ';',
-              gastos_operacion_desviacion, ';',
-              gastos_operacion_acumulado, ';',
-              gastos_operacion_acumulado_porcentaje, ';',
-              gastos_operacion_plan_acumulado, ';',
-              gastos_operacion_plan_acumulado_porcentaje, ';',
-              gastos_operacion_plan_acumulado_desviacion, ';',
-              gastos_operacion_plan_acumulado_desviacion_porcentaje, ';',
-              gastos_operacion_acumulado_last_year, ';',
-              gastos_operacion_acumulado_last_year_porcentaje
-              )
-        print('Utilidad de operacion', ';',
-              utilidad_operacion, ';',
-              utilidad_operacion_plan, ';',
-              utilidad_operacion_desviacion, ';',
-              utilidad_operacion_acumulado, ';',
-              utilidad_operacion_acumulado_porcentaje, ';',
-              utilidad_operacion_plan_acumulado, ';',
-              utilidad_operacion_plan_acumulado_porcentaje, ';',
-              utilidad_operacion_plan_acumulado_desviacion, ';',
-              utilidad_operacion_plan_acumulado_desviacion_porcentaje, ';',
-              utilidad_operacion_acumulado_last_year, ';',
-              utilidad_operacion_acumulado_last_year_porcentaje
-              )
-        print('')
-        print('Intereses Ganados', ';',
-              ingresos_interes, ';',
-              ingresos_interes_plan, ';',
-              ingresos_interes_desviacion, ';',
-              ingresos_interes_acumulado, ';',
-              ingresos_interes_acumulado_porcentaje, ';',
-              ingresos_interes_plan_acumulado, ';',
-              ingresos_interes_plan_acumulado_porcentaje, ';',
-              ingresos_interes_plan_acumulado_desviacion, ';',
-              ingresos_interes_plan_acumulado_desviacion_desviacion, ';',
-              ingresos_interes_acumulado_last_year, ';',
-              ingresos_interes_acumulado_last_year_porcentaje
-              )
-        print('Intereses Pagados;',
-              intereses_pagados, ';',
-              intereses_pagados_plan, ';',
-              intereses_pagados_desviacion, ';',
-              intereses_pagados_acumulado, ';',
-              intereses_pagados_acumulado_porcentaje, ';',
-              intereses_pagados_plan_acumulado, ';',
-              intereses_pagados_plan_acumulado_porcentaje, ';',
-              intereses_pagados_plan_desviacion, ';',
-              intereses_pagados_plan_desviacion_porcentaje, ';',
-              intereses_pagados_acumulado_last_year, ';',
-              intereses_pagados_acumulado_last_year_porcentaje
-              )
-        print('Perdida cambiaria', ';',
-              perdida_cambiaria, ';',
-              perdida_cambiaria_plan, ';',
-              perdida_cambiaria_desviacion, ';',
-              perdida_cambiaria_acumulado, ';',
-              perdida_cambiaria_acumulado_porcentaje, ';',
-              perdida_cambiaria_plan_acumulado, ';',
-              perdida_cambiaria_plan_acumulado_porcentaje, ';',
-              perdida_cambiaria_plan_acumulado_desviacion, ';',
-              perdida_cambiaria_plan_acumulado_desviacion_porcentaje, ';',
-              perdida_cambiaria_acumulado_last_year, ';',
-              perdida_cambiaria_acumulado_last_year_porcentaje
-              )
-        print('Utilidad cambiaria', ';',
-              utilidad_cambiaria, ';',
-              utilidad_cambiaria_plan, ';',
-              utilidad_cambiaria_desviacion, ';',
-              utilidad_cambiaria_acumulado, ';',
-              utilidad_cambiaria_acumulado_porcentaje, ';',
-              utilidad_cambiaria_plan_acumulado, ';',
-              utilidad_cambiaria_plan_acumulado_porcentaje, ';',
-              utilidad_cambiaria_plan_acumulado_desviacion, ';',
-              utilidad_cambiaria_plan_acumulado_desviacion_porcentaje, ';',
-              utilidad_cambiaria_acumulado_last_year, ';',
-              utilidad_cambiaria_acumulado_last_year_porcentaje
-              )
-        print(';',
-              perdida_cambiaria_saldo, ';',
-              ingresos_interes_saldo, ';',
-              utilidad_cambiaria_saldo, ';',
-              perdida_cambiaria_acumulado_saldo, ';',
-              perdida_cambiaria_acumulado_saldo_porcentaje, ';',
-              utilidad_cambiaria_plan_acumulado_saldo, ';',
-              utilidad_cambiaria_plan_acumulado_saldo_porcentaje, ';',
-              utilidad_cambiaria_plan_acumulado_saldo_desviacion, ';',
-              utilidad_cambiaria_plan_acumulado_saldo_desviacion_porcentaje, ';',
-              perdida_cambiaria_acumulado_last_year_saldo, ';',
-              perdida_cambiaria_acumulado_last_year_saldo_porcentaje
-              )
-        print('')
-        print('Otros Gastos;',
-              otros_gastos, ';',
-              otros_gastos_plan, ';',
-              otros_gastos_desviacion, ';',
-              otros_gastos_acumulado, ';',
-              otros_gastos_acumulado_porcentaje, ';',
-              otros_gastos_plan_acumulado, ';',
-              otros_gastos_plan_acumulado_porcentaje, ';',
-              otros_gastos_plan_acumulado_desviacion, ';',
-              otros_gastos_plan_acumulado_desviacion_porcentaje, ';',
-              otros_gastos_acumulado_last_year, ';',
-              otros_gastos_acumulado_last_year_porcentaje
-              )
-        print('Otros Ingresos;',
-              otros_ingresos, ';',
-              otros_ingresos_plan, ';',
-              otros_ingresos_desviacion, ';',
-              otros_ingresos_acumulado, ';',
-              otros_ingresos_acumulado_porcentaje, ';',
-              otros_ingresos_plan_acumulado, ';',
-              otros_ingresos_plan_acumulado_porcentaje, ';',
-              otros_ingresos_plan_acumulado_desviacion, ';',
-              otros_ingresos_plan_acumulado_desviacion_porcentaje, ';',
-              otros_ingresos_acumulado_last_year, ';',
-              otros_ingresos_acumulado_last_year_porcentaje
-              )
-        print('UAI;',
-              utilidad_antes_impuestos, ';',
-              utilidad_antes_impuestos_plan, ';',
-              utilidad_antes_impuestos_desviacion, ';',
-              utilidad_antes_impuestos_acumulado, ';',
-              utilidad_antes_impuestos_acumulado_porcentaje, ';',
-              utilidad_antes_impuestos_plan_acumulado, ';',
-              utilidad_antes_impuestos_plan_acumulado_porcentaje, ';',
-              utilidad_antes_impuestos_plan_acumulado_desviacion, ';',
-              utilidad_antes_impuestos_plan_acumulado_desviacion_porcentaje, ';',
-              utilidad_antes_impuestos_plan_acumulado_last_year, ';',
-              utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje
-              )
-        print('')
-        print('ISR;',
-              isr, ';',
-              isr_plan, ';',
-              isr_desviacion, ';',
-              isr_acumulado, ';',
-              isr_acumulado_porcentaje, ';',
-              isr_plan_acumulado, ';',
-              isr_plan_acumulado_porcentaje, ';',
-              isr_plan_desviacion, ';',
-              isr_plan_desviacion_porcentaje, ';',
-              isr_acumulado_last_year, ';',
-              isr_acumulado_last_year_porcentaje
-              )
-        print('PTU;',
-              ptu, ';',
-              ptu_plan, ';',
-              ptu_desviacion, ';',
-              ptu_acumulado, ';',
-              ptu_acumulado_porcentaje, ';',
-              ptu_plan_acumulado, ';',
-              ptu_plan_acumulado_porcentaje, ';',
-              ptu_plan_desviacion, ';',
-              ptu_plan_desviacion_porcentaje, ';',
-              ptu_acumulado_last_year, ';',
-              ptu_acumulado_last_year_porcentaje
-              )
-        print(';',
-              isr_ptu, ';',
-              isr_plan_ptu_plan, ';',
-              isr_desviacion_ptu_desviacion, ';',
-              isr_ptu_acumulado, ';',
-              isr_ptu_acumulado_porcentaje, ';',
-              isr_plan_ptu_plan_acumulado, ';',
-              isr_plan_ptu_plan_acumulado_porcentaje, ';',
-              isr_plan_ptu_plan_desviacion, ';',
-              isr_plan_ptu_plan_desviacion_porcentaje, ';',
-              isr_ptu_acumulado_last_year, ';',
-              isr_ptu_acumulado_last_year_porcentaje
-              )
-        print('')
-        print('Utilidad Neta;',
-              utilidad_neta, ';',
-              utilidad_neta_plan, ';',
-              utilidad_neta_desviacion, ';',
-              utilidad_neta_acumulado, ';',
-              utilidad_neta_acumulado_porcentaje, ';',
-              utilidad_neta_plan_acumulado, ';',
-              utilidad_neta_plan_acumulado_porcentaje, ';',
-              utilidad_neta_desviacion_acumulado, ';',
-              utilidad_neta_desviacion_acumulado_porcentaje, ';',
-              utilidad_neta_last_year, ';',
-              utilidad_neta_last_year_porcentaje
-              )
-        print('')
-        print('UAI;',
-              utilidad_antes_impuestos, ';;;',
-              utilidad_antes_impuestos_acumulado, ';',
-              utilidad_antes_impuestos_acumulado_porcentaje, ';',
-              utilidad_antes_impuestos_plan_acumulado, ';',
-              utilidad_antes_impuestos_plan_acumulado_porcentaje, ';;;',
-              utilidad_antes_impuestos_plan_acumulado_last_year, ';',
-              utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje
-              )
-        print('Drepeciacion y Mortizacion;',
-              depreciacion_amortizacion, ';;;',
-              depreciacion_amortizacion_acumulado, ';',
-              depreciacion_amortizacion_acumulado_porcentaje, ';',
-              depreciacion_amortizacion_plan_acumulado, ';',
-              depreciacion_amortizacion_plan_acumulado_porcentaje, ';;;',
-              depreciacion_amortizacion_last_year, ';',
-              depreciacion_amortizacion_last_year_porcentaje
-              )
-        print('')
-        print('Ebitda Del Periodo;',
-              ebitda_periodo, ';;;',
-              ebitda_periodo_acumulado, ';',
-              ebitda_periodo_acumulado_porcentaje, ';',
-              ebitda_periodo_plan_acumulado, ';',
-              ebitda_periodo_plan_acumulado_porcentaje, ';;;',
-              ebitda_periodo_acumulado_last_year, ';',
-              ebitda_periodo_acumulado_last_year_porcentaje
-              )
-        print(';', ebitda_periodo_porcentaje)
-
         statement_income_data.create({
             'er_report_id': self.id,
+            'date_start_first_day': '01/01/' + str(year_full),
+            'last_year_report': last_year,
+            'codigo': str_month + year,
+            'date_end_last_day': str(day) + '/' + str(month) + '/' + str(year_full),
             'ventas': round(ventas, 0),
             'plan': round(plan, 0),
             'ventas_desviacion': round(ventas_desviacion, 0),
@@ -1147,7 +863,7 @@ class ErReportWizard(models.TransientModel):
             'ingresos_interes_plan_acumulado': round(ingresos_interes_plan_acumulado, 0),
             'ingresos_interes_plan_acumulado_porcentaje': round(ingresos_interes_plan_acumulado_porcentaje, 1),
             'ingresos_interes_plan_acumulado_desviacion': round(ingresos_interes_plan_acumulado_desviacion, 0),
-            'ingresos_interes_plan_acumulado_desviacion_desviacion': round(ingresos_interes_plan_acumulado_desviacion_desviacion, 0),
+            'ingresos_interes_plan_acumulado_desviacion_porcentaje': round(ingresos_interes_plan_acumulado_desviacion_porcentaje, 0),
             'ingresos_interes_acumulado_last_year': round(ingresos_interes_acumulado_last_year, 0),
             'ingresos_interes_acumulado_last_year_porcentaje': round(ingresos_interes_acumulado_last_year_porcentaje, 1),
 
@@ -1278,36 +994,29 @@ class ErReportWizard(models.TransientModel):
             'ebitda_periodo_porcentaje': round(ebitda_periodo_porcentaje, 1)
         })
 
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'er.report.wizard',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_id': self.id,
-            'views': [(False, 'form')],
-            'target': 'new',
-        }
-
-    @api.multi
-    def get_pdf_report(self):
-        report = self.env['ir.actions.report']._get_report_from_name(
-            'ER_report.action_statement_report_pdf')
-        return report.report_action(self)
-        # data = {
-        #     'ids': self.ids,
-        #     'model': self._name,
-        #     'form': {
-        #         'date_start': self.date_start,
-        #         'date_end': self.date_end,
-        #     },
+        # return {
+        #     'type': 'ir.actions.act_window',
+        #     'res_model': 'er.report.wizard',
+        #     'view_mode': 'form',
+        #     'view_type': 'form',
+        #     'res_id': self.id,
+        #     'views': [(False, 'form')],
+        #     'target': 'new',
         # }
-        # return self.env.ref('ER_report.action_statement_report_pdf').report_action(self, data=data)
 
 
-class StatementIncomeDetail(models.TransientModel):
+class StatementIncomeDetail(models.Model):
     _name = "statement.income.detail"
 
     er_report_id = fields.Many2one('er.report.wizard', 'Statement')
+    date_start_first_day = fields.Char(
+        string='date_start_first_day', readonly=True)
+    last_year_report = fields.Char(
+        string='last_year_report', readonly=True)
+    codigo = fields.Char(
+        string='codigo', readonly=True)
+    date_end_last_day = fields.Char(
+        string='date_end_last_day', readonly=True)
     ventas = fields.Float(string='Ventas', readonly=True)
     plan = fields.Float(string='Plan', readonly=True)
     ventas_desviacion = fields.Float(
@@ -1515,8 +1224,8 @@ class StatementIncomeDetail(models.TransientModel):
         string='Porcentaje', readonly=True)
     ingresos_interes_plan_acumulado_desviacion = fields.Float(
         string='ingresos_interes_plan_acumulado_desviacion', readonly=True)
-    ingresos_interes_plan_acumulado_desviacion_desviacion = fields.Float(
-        string='ingresos_interes_plan_acumulado_desviacion_desviacion', readonly=True)
+    ingresos_interes_plan_acumulado_desviacion_porcentaje = fields.Float(
+        string='ingresos_interes_plan_acumulado_desviacion_porcentaje', readonly=True)
     ingresos_interes_acumulado_last_year = fields.Float(
         string='ingresos_interes_acumulado_last_year', readonly=True)
     ingresos_interes_acumulado_last_year_porcentaje = fields.Float(

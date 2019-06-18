@@ -18,8 +18,9 @@
         'wizard/er_report_wizard.xml',
         'views/er_plan_estado_resultado_view.xml',
         # reports
-        'reports/er_report_definition.xml',
         'reports/er_report_template.xml',
+        # data
+        'data/report_data.xml',
     ],
     'demo': [
     ],

@@ -1,18 +1,1080 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <!--<report id="statement_report_pdf" model="er.report.wizard" string="ER Report" name="ER_report.statement_report_pdf_view" file="ER_report.statement_report_pdf" report_type="qweb-pdf"/>-->
-
-  <template id="statement_report_pdf">
+  <template id="statement_report_pdf_view">
     <t t-call="web.html_container">
       <t t-foreach="docs" t-as="doc">
+        <div class="header"></div>
         <t t-call="web.external_layout">
+          <h2>
+            GRUPO REQUIEZ SA de CV
+          </h2>
+          <h2>
+            <strong>Estado de Resultados</strong>
+          </h2>
+          <h6>
+            Por los meses que corresponden del
+            <t t-foreach="doc.statement_income_data" t-as="o">
+              <strong><t t-esc="o.date_start_first_day"/></strong>
+              al
+              <strong><t t-esc="o.date_end_last_day"/></strong>
+            </t>
+          </h6>
+          <h6>
+            <strong>(Cifras en pesos)</strong>
+          </h6>
           <div class="page">
-            <h2 t-field="doc.date_start"/>
-            <h2 t-field="doc.date_end"/>
+            <table width="100%">
+              <tr>
+                <th width="25"></th>
+                <th style="text-align:center; border-bottom:solid 1px;" width="45" colspan="3">MES</th>
+                <th width="5"></th>
+                <th style="text-align:center; border-bottom:solid 1px;" width="90" colspan="6">ACUMULADO</th>
+                <th width="5"></th>
+                <th width="30" colspan="2"></th>
+              </tr>
+              <tr>
+                <th width="15"></th>
+                <th style="text-align:center" width="13">REAL</th>
+                <th style="text-align:center" width="13">PLAN</th>
+                <th style="text-align:center" width="19">DESVIACIÓN</th>
+                <th width="5"></th>
+                <th style="text-align:center" width="30" colspan="2">REAL</th>
+                <th style="text-align:center" width="30" colspan="2">PLAN</th>
+                <th style="text-align:center" width="30" colspan="2">DESVIACIÓN</th>
+                <th width="5"></th>
+                <th style="text-align:center" width="30" colspan="2">
+                  <t t-foreach="doc.statement_income_data" t-as="o">
+                    <t t-esc="o.last_year_report"/>
+                  </t>
+                </th>
+              </tr>
+              <!--**************** FIN DE LOS ENCABEZADOS*********************-->
+
+              <t t-foreach="doc.statement_income_data" t-as="o">
+                <tr>
+                  <td height="20"></td>
+                </tr>
+                <tr>
+                  <td style="text-align:center">
+                    VENTAS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ventas_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ventas_acumulado_desviacion_porcentaje"/>%
+                  </td>
+
+                  <td ></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ventas_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*****************REBAJAS Y DEVOLUCIONES*************-->
+                <tr>
+                  <td style="text-align:center">
+                    REBAJAS Y DEVOLUCIONES
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.rebajas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.plan_rebajas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.rebajas_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right ; border-bottom:solid 1px;">
+                    $<span t-field="o.rebajas_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.rebajas_acumulado_procentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.plan_acumulado_rebajas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.plan_acumulado_rebajas_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.rebajas_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.rebajas_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.rebajas_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.rebajas_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--******************VENTAS NETAS******************-->
+                <tr>
+                  <td style="text-align:center">
+                    VENTAS NETAS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_netas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.plan_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_netas_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.desviacion_rebajas" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    100.0%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.plan_acumulado_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    100.0%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ventas_netas_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.desviacion_rebajas_desviacion_procentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.rebajas_acumulado_last_year_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    100.0%
+                  </td>
+                </tr>
+                <tr>
+                  <td height="20"></td>
+                </tr>
+                <!--*******************COSTO DE VENTAS*********************-->
+                <tr>
+                  <td style="text-align:center">
+                    COSTO DE VENTAS
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_real" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.costo_venta_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.costo_venta_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.costo_venta_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.costo_venta_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.costo_venta_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*********************UTILIDAD BRUTA*************************-->
+                <tr>
+                  <td style="text-align:center">
+                    UTILIDAD BRUTA
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_real" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_acumulado_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_bruta_acumulado_saldo_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_plan_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_bruta_plan_saldo_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_bruta_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_bruta_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.costo_venta_last_year_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.costo_venta_last_year_saldo_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*********************************************-->
+                <tr>
+                  <td></td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_bruta_plan_procentaje"/>%
+                  </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <!--**********************GASTOS DE OPERACION:***********************-->
+                <tr>
+                  <td >GASTOS DE OPERACION:</td>
+                </tr>
+
+                <!--**********************GASTOS DE ADMINISTRACIÓN Y VENTAS:***********************-->
+                <tr>
+                  <td style="text-align:center; font-size:12;">
+                    GASTOS DE ADMINISTRACIÓN Y VENTAS
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.gastos_operacion_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.gastos_operacion_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.gastos_operacion_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.gastos_operacion_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.gastos_operacion_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************UTILIDAD DE OPERACIONES***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    UTILIDAD DE OPERACIÓN
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_operacion_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_operacion_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_operacion_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_operacion_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_operacion_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <tr>
+                  <td style="font-size:12;">
+                    RESULTADO INTEGRAL DE FINANCIAMIENTO
+                  </td>
+                </tr>
+
+                <!--**********************INTERESES GANADOS***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    INTERESES GANADOS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ingresos_interes_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ingresos_interes_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ingresos_interes_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ingresos_interes_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************INTERESES PAGADOS***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    INTERESES PAGADOS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.intereses_pagados_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.intereses_pagados_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.intereses_pagados_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.intereses_pagados_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.intereses_pagados_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************PERDIDA CAMBIARIA***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    PERDIDA CAMBIARIA
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************UTILIDAD CAMBIARIA***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    UTILIDAD CAMBIARIA
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.utilidad_cambiaria_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.utilidad_cambiaria_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.utilidad_cambiaria_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.utilidad_cambiaria_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.utilidad_cambiaria_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************SALDO DE LA OPERACION***********************-->
+                <tr>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.ingresos_interes_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_cambiaria_saldo" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_acumulado_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_acumulado_saldo_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_cambiaria_plan_acumulado_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_cambiaria_plan_acumulado_saldo_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_cambiaria_plan_acumulado_saldo_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_cambiaria_plan_acumulado_saldo_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.perdida_cambiaria_acumulado_last_year_saldo" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.perdida_cambiaria_acumulado_last_year_saldo_porcentaje"/>%
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+                <tr>
+                  <td style="font-size:12;">
+                    OTROS INGRESOS Y GASTOS
+                  </td>
+                </tr>
+
+                <!--*********************OTROS GASTOS************************-->
+                <tr>
+                  <td style="text-align:center;">
+                    OTROS GASTOS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.otros_gastos_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.otros_gastos_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.otros_gastos_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.otros_gastos_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.otros_gastos_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************OTROS INGRESOS***********************-->
+                <tr>
+                  <td style="text-align:center;">
+                    OTROS INGRESOS
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.otros_ingresos_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.otros_ingresos_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.otros_ingresos_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.otros_ingresos_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.otros_ingresos_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--**********************UTILIDAD ANTES DE IMPUESTOS***********************-->
+                <tr>
+                  <td style="text-align:center;font-size:12;">
+                    UTILIDAD ANTES DE IMPUESTOS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan_acumulado_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_plan_acumulado_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <!--*********************IMPUESTOS SOBRE LA RENTA************************-->
+                <tr>
+                  <td style="text-align:center;">
+                    IMPUESTOS SOBRE LA RENTA
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.isr_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.isr_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.isr_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.isr_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.isr_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*********************PTU************************-->
+                <tr>
+                  <td style="text-align:center;">
+                    PTU
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.ptu_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.ptu_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.ptu_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.ptu_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.ptu_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*********************SALDO************************-->
+                <tr>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_ptu" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_plan_ptu_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_desviacion_ptu_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_ptu_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.isr_ptu_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_plan_ptu_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.isr_plan_ptu_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_plan_ptu_plan_desviacion" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.isr_plan_ptu_plan_desviacion_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.isr_ptu_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.isr_ptu_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <!--*********************UTILIDAD NETA************************-->
+                <tr>
+                  <td style="text-align:center;">
+                    UTILIDAD NETA
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_plan" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_desviacion" widget="monetary"/>
+                  </td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.utilidad_neta_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.utilidad_neta_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_desviacion_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.utilidad_neta_desviacion_acumulado_porcentaje"/>%
+                  </td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.utilidad_neta_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.utilidad_neta_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <!--*********************UTILIDAD ANTES DE IMPUESTOS************************-->
+                <tr>
+                  <td style="text-align:center;font-size:12;">
+                    UTILIDAD ANTES DE IMPUESTOS
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos" widget="monetary"/>
+                  </td>
+                  <td colspan="2"></td>
+
+                  <td></td>
+
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td colspan="2"></td>
+                  <td></td>
+                  <td style="text-align:right">
+                    $<span t-field="o.utilidad_antes_impuestos_plan_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right">
+                    <t t-esc="o.utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <!--*********************DEPRECIACIONES Y AMORTIZACIONES************************-->
+                <tr>
+                  <td style="text-align:center;font-size:12;">
+                    DEPRECIACIONES Y AMORTIZACIONES
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.depreciacion_amortizacion" widget="monetary"/>
+                  </td>
+                  <td colspan="2"></td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.depreciacion_amortizacion_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.depreciacion_amortizacion_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.depreciacion_amortizacion_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.depreciacion_amortizacion_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td colspan="2"></td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    $<span t-field="o.depreciacion_amortizacion_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 1px;">
+                    <t t-esc="o.depreciacion_amortizacion_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <!--*********************EBITDA DEL PERIODO************************-->
+                <tr>
+                  <td style="text-align:center;">
+                    EBITDA DEL PERIODO
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.ebitda_periodo" widget="monetary"/>
+                  </td>
+                  <td colspan="2"></td>
+
+                  <td></td>
+
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.ebitda_periodo_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.ebitda_periodo_acumulado_porcentaje"/>%
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.ebitda_periodo_plan_acumulado" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.ebitda_periodo_plan_acumulado_porcentaje"/>%
+                  </td>
+                  <td colspan="2"></td>
+                  <td></td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    $<span t-field="o.ebitda_periodo_acumulado_last_year" widget="monetary"/>
+                  </td>
+                  <td style="text-align:right; border-bottom:solid 3px;">
+                    <t t-esc="o.ebitda_periodo_acumulado_last_year_porcentaje"/>%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td colspan="14" height="20"></td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td style="text-align:right">
+                    <t t-esc="o.ebitda_periodo_porcentaje"/>%
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    MMC
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <h6>AF<t t-esc="o.codigo"/>
+                      GR</h6>
+                  </td>
+                </tr>
+              </t>
+            </table>
           </div>
+          <div class="footer"></div>
         </t>
       </t>
     </t>
   </template>
-
 </odoo>

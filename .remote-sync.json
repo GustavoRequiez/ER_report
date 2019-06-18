@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "192.168.1.21",
+  "port": "22",
+  "target": "/opt/odoo/extra_addons/ER_report",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "requiez",
+  "password": "odoo",
+  "watch": [],
+  "transport": "scp"
+}
