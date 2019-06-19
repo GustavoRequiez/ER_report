@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="er_cuentas_view_form" model="ir.ui.view">
+    <field name="name">er.cuentas.estado.resultados.view.form</field>
+    <field name="model">er.cuentas.estado.resultados</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <form string="Cuentas Estado de Resultados">
+        <group>
+          <group>
+            <field name="name"/>
+          </group>
+          <field name="account_ids">
+            <tree limit="10">
+              <field name="name"/>
+              <field name="code"/>
+            </tree>
+          </field>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <record id="er_cuentas_view_tree" model="ir.ui.view">
+    <field name="name">er.cuentas.estado.resultados.view.tree</field>
+    <field name="model">er.cuentas.estado.resultados</field>
+    <field name="arch" type="xml">
+      <tree string="Cuentas Estado de Resultados">
+        <field name="name"/>
+        <field name="account_ids">
+          <!--<tree limit="10"> <field name="name"/> <field name="code"/> </tree>-->
+        </field>
+      </tree>
+    </field>
+  </record>
+
+  <record id="er_cuentas_estado_resultados_action" model="ir.actions.act_window">
+    <field name="name">Cuentas Estado de Resultados</field>
+    <field name="res_model">er.cuentas.estado.resultados</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Click to set a new value of a account.</p>
+    </field>
+  </record>
+
+  <!--<record model="ir.ui.view" id="cuentas_search_view"> <field name="name">cuentas.search</field> <field name="model">er.cuentas.estado.resultados</field> <field name="arch" type="xml"> <search> <group string="Group By"> <filter name="Cuenta"
+  string="Cuenta" context="{'group_by': 'name'}"/> </group> </search> </field> </record>-->
+
+  <menuitem id="menu_er_cuentas_estado_resultados" name="Cuentas Estado de Resultados" sequence="24" parent="account.account_reports_management_menu" action="er_cuentas_estado_resultados_action"/>
+</odoo>

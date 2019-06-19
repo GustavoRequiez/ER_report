@@ -18,7 +18,7 @@
           </field>
         </group>
         <footer>
-          <button name="get_report" string="Get Report" type="object" class="oe_highlight"/>
+          <button name="get_report" string="Calcular" type="object" class="oe_highlight"/>
         </footer>
       </form>
     </field>

@@ -10,9 +10,9 @@ class ErReportWizard(models.Model):
     _name = 'er.report.wizard'
 
     date_start = fields.Date(
-        string="Start Date", required=True, default=fields.Date.today)  # default=fields.Date.today
+        string="Fecha Inicio", required=True, default=fields.Date.today)  # default=fields.Date.today
     date_end = fields.Date(
-        string="End Date", required=True, default=fields.Date.today)
+        string="Fechas Fin", required=True, default=fields.Date.today)
 
     statement_income_data = fields.One2many(
         'statement.income.detail',
@@ -29,6 +29,7 @@ class ErReportWizard(models.Model):
         year = datetime.strptime(self.date_start, '%Y-%m-%d').strftime('%y')
 
         account_move_line_obj = self.env['account.move.line']
+        accounts_obj = self.env['er.cuentas.estado.resultados']
         er_plan_obj = self.env['er.plan.estado.resultados']
 
         date_start = self.date_start
@@ -63,20 +64,31 @@ class ErReportWizard(models.Model):
         elif month == '12':
             str_month = 'DICIEMBRE'
 
+        # **************************Cuentas**********************************
+        def get_accounts(name):
+            account_list = []
+            account_id = accounts_obj.search([
+                ('name', '=', name)])
+            for a in account_id.account_ids:
+                account_list.append(a.id)
+            return account_list
+        #print('>>>>>>>>>>>>>>>>>>>>>>>>', get_accounts('VENTAS'))
+        # ************************************************************
+
         def get_value_credit(ids, date_start, date_end):
-            account_ids = account_move_line_obj.search([
+            account_moves_ids = account_move_line_obj.search([
                 ('date', '>=', date_start),
                 ('date', '<=', date_end),
                 ('account_id', 'in', ids)])
-            credit = sum(account_ids.mapped('credit'))
+            credit = sum(account_moves_ids.mapped('credit'))
             return credit
 
         def get_value_debit(ids, date_start, date_end):
-            account_ids = account_move_line_obj.search([
+            account_moves_ids = account_move_line_obj.search([
                 ('date', '>=', date_start),
                 ('date', '<=', date_end),
                 ('account_id', 'in', ids)])
-            debit = sum(account_ids.mapped('debit'))
+            debit = sum(account_moves_ids.mapped('debit'))
             return debit
 
         def get_value_plan(str_month, year, plan):
@@ -93,18 +105,17 @@ class ErReportWizard(models.Model):
                 total_plan += sum(er_plan_id.mapped('value'))
             return total_plan
 
-        accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
+        accounts = get_accounts('VENTAS')
         ventas_credit = get_value_credit(accounts, date_start, date_stop)
-
         ventas_debit = get_value_debit(accounts, date_start, date_stop)
         ventas = ventas_credit - ventas_debit
 
-        accounts = ([6942, 6943, 6944, 6945, 6946, 6947, 6948, 6949,
-                     6950, 6951, 6952, 6953, 6954, 6955, 6956, 6957, 6958])
+        accounts = get_accounts('REBAJAS Y DEVOLUCIONES')
         rebajas_credit = get_value_credit(accounts, date_start, date_stop)
         rebajas_debit = get_value_debit(accounts, date_start, date_stop)
         rebajas = rebajas_debit - rebajas_credit
         ventas_netas = ventas - rebajas
+
         plan = get_value_plan(str_month, year_full, 'VENTAS')
         plan_rebajas = get_value_plan(
             str_month, year_full, 'REBAJAS Y DEVOLUCIONES')
@@ -112,26 +123,26 @@ class ErReportWizard(models.Model):
         ventas_desviacion = ventas - plan
         rebajas_desviacion = rebajas - plan_rebajas
         ventas_netas_desviacion = ventas_netas - plan_saldo
-        accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
+
+        accounts = get_accounts('VENTAS')
         ventas_acumulado_credit = get_value_credit(
             accounts, date_start_first_day, date_stop)
         ventas_acumulado_debit = get_value_debit(
             accounts, date_start_first_day, date_stop)
-        ventas_acumulado = round(
-            (ventas_acumulado_credit - ventas_acumulado_debit), 0)
-        accounts = ([6941, 6951, 6952, 6946, 6953, 6954,
-                     6955, 6956, 6957, 6958, 6959])
+        ventas_acumulado = (ventas_acumulado_credit - ventas_acumulado_debit)
+
+        accounts = get_accounts('REBAJAS Y DEVOLUCIONES')
         rebajas_credit_acumulado = get_value_credit(
             accounts, date_start_first_day, date_stop)
         rebajas_debit_acumulado = get_value_debit(
             accounts, date_start_first_day, date_stop)
-        rebajas_acumulado = round(
-            rebajas_debit_acumulado - rebajas_credit_acumulado, 0)
+        rebajas_acumulado = rebajas_debit_acumulado - rebajas_credit_acumulado
+
         desviacion_rebajas = ventas_acumulado - rebajas_acumulado
-        ventas_acumulado_porcentaje = round(
-            (ventas_acumulado * 100) / desviacion_rebajas, 1)
-        rebajas_acumulado_procentaje = round(
-            (rebajas_acumulado * 100) / desviacion_rebajas, 1)
+        ventas_acumulado_porcentaje = (
+            ventas_acumulado * 100) / desviacion_rebajas
+        rebajas_acumulado_procentaje = (
+            rebajas_acumulado * 100) / desviacion_rebajas
         months_list = ['ENERO',  'FEBRERO', 'MARZO', 'ABRIL',  'MAYO',  'JUNIO',
                        'JULIO',  'AGOSTO',  'SEPTIEMBRE',  'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE']
         lista = []
@@ -146,65 +157,65 @@ class ErReportWizard(models.Model):
             lista, year_full, 'REBAJAS Y DEVOLUCIONES')
         plan_acumulado_saldo = plan_acumulado - plan_acumulado_rebajas
 
-        plan_acumulado_porcentaje = round(
-            (plan_acumulado * 100) / plan_acumulado_saldo, 1)
-        plan_acumulado_rebajas_porcentaje = round(
-            (plan_acumulado_rebajas * 100) / plan_acumulado_saldo, 1)
+        plan_acumulado_porcentaje = (
+            plan_acumulado * 100) / plan_acumulado_saldo
+        plan_acumulado_rebajas_porcentaje = (
+            plan_acumulado_rebajas * 100) / plan_acumulado_saldo
         ventas_acumulado_desviacion = ventas_acumulado - plan_acumulado
         rebajas_acumulado_desviacion = rebajas_acumulado - plan_acumulado_rebajas
         ventas_netas_acumulado_desviacion = desviacion_rebajas - plan_acumulado_saldo
-        ventas_acumulado_desviacion_porcentaje = round(
-            (ventas_acumulado_desviacion * 100) / plan_acumulado, 1)
-        rebajas_acumulado_desviacion_porcentaje = round(
-            (rebajas_acumulado_desviacion * 100) / plan_acumulado_rebajas, 1)
-        desviacion_rebajas_desviacion_procentaje = round(
-            (ventas_netas_acumulado_desviacion * 100) / plan_acumulado_saldo, 1)
+        ventas_acumulado_desviacion_porcentaje = (
+            ventas_acumulado_desviacion * 100) / plan_acumulado
+        rebajas_acumulado_desviacion_porcentaje = (
+            rebajas_acumulado_desviacion * 100) / plan_acumulado_rebajas
+        desviacion_rebajas_desviacion_procentaje = (
+            ventas_netas_acumulado_desviacion * 100) / plan_acumulado_saldo
         last_year = int(year_full.strip())
         last_year = (last_year - 1)
         date_start_last_year = (str(last_year) + '/01/01')
-        date_end_last_year = (str(last_year) + '/'
-                              + str(month) + '/' + str(day))
-        accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
+        date_end_last_year = (str(last_year) + '/' +
+                              str(month) + '/' + str(day))
+
+        #accounts = ([6932, 6933, 6934, 6935, 6936, 6937, 6938, 6939])
+        accounts = get_accounts('VENTAS')
         ventas_acumulado_credit_last_year = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         ventas_acumulado_debit_last_year = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
-        ventas_acumulado_last_year = round(
-            (ventas_acumulado_credit_last_year - ventas_acumulado_debit_last_year), 0)
-        accounts = ([6942, 6943, 6944, 6945, 6946, 6947, 6948, 6949,
-                     6950, 6951, 6952, 6953, 6954, 6955, 6956, 6957, 6958])
+        ventas_acumulado_last_year = (
+            ventas_acumulado_credit_last_year - ventas_acumulado_debit_last_year)
+
+        # accounts = ([6942, 6943, 6944, 6945, 6946, 6947, 6948, 6949,
+        #              6950, 6951, 6952, 6953, 6954, 6955, 6956, 6957, 6958])
+        accounts = get_accounts('REBAJAS Y DEVOLUCIONES')
         rebajas_credit_acumulado_last_year = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         rebajas_debit_acumulado_last_year = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
-        rebajas_acumulado_last_year = round(
-            rebajas_debit_acumulado_last_year - rebajas_credit_acumulado_last_year, 0)
+        rebajas_acumulado_last_year = rebajas_debit_acumulado_last_year - \
+            rebajas_credit_acumulado_last_year
         rebajas_acumulado_last_year_saldo = ventas_acumulado_last_year - \
             rebajas_acumulado_last_year
-        ventas_acumulado_last_year_porcentaje = round(
-            (ventas_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo, 1)
-        rebajas_acumulado_last_year_porcentaje = round(
-            (rebajas_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo, 1)
+        ventas_acumulado_last_year_porcentaje = (
+            ventas_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
+        rebajas_acumulado_last_year_porcentaje = (
+            rebajas_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
 
-        accounts = ([6961, 6962, 6963, 6964, 6965, 6966, 6967, 6968,
-                     6969, 6970, 6972, 6973, 6974, 6975, 6976, 6977, 6978, 6979, 6980])
+        accounts = get_accounts('COSTO DE VENTA')
         costo_venta_debit = get_value_debit(accounts, date_start, date_stop)
         costo_venta_credit = get_value_credit(accounts, date_start, date_stop)
         costo_venta_real = costo_venta_debit - costo_venta_credit
 
         utilidad_bruta_real = ventas_netas - costo_venta_real
-        utilidad_porcentaje = round(
-            (utilidad_bruta_real * 100) / ventas_netas, 1)
+        utilidad_porcentaje = (utilidad_bruta_real * 100) / ventas_netas
         costo_venta_plan = get_value_plan(
             str_month, year_full, 'COSTO DE VENTA')
         utilidad_bruta_plan = plan_saldo - costo_venta_plan
-        utilidad_bruta_plan_procentaje = round(
-            (utilidad_bruta_plan * 100) / plan_saldo, 0)
+        utilidad_bruta_plan_procentaje = (
+            utilidad_bruta_plan * 100) / plan_saldo
         costo_venta_desviacion = costo_venta_plan - costo_venta_real
         utilidad_bruta_desviacion = utilidad_bruta_real - utilidad_bruta_plan
 
-        accounts = ([6961, 6962, 6963, 6964, 6965, 6966, 6967, 6968,
-                     6969, 6970, 6972, 6973, 6974, 6975, 6976, 6977, 6978, 6979, 6980])
         costo_venta_debit_plan_acumulado = get_value_debit(
             accounts, date_start_first_day, date_stop)
         costo_venta_credit_plan_acumulado = get_value_credit(
@@ -217,49 +228,51 @@ class ErReportWizard(models.Model):
         costo_venta_acumulado_porcentaje = (
             costo_venta_acumulado * 100) / desviacion_rebajas
 
-        utilidad_bruta_acumulado_saldo_porcentaje = round(
-            (utilidad_bruta_acumulado_saldo * 100) / desviacion_rebajas, 1)
+        utilidad_bruta_acumulado_saldo_porcentaje = (
+            utilidad_bruta_acumulado_saldo * 100) / desviacion_rebajas
         costo_venta_plan_acumulado = get_value_plan_acumulado(
             lista, year_full, 'COSTO DE VENTA')
         utilidad_bruta_plan_saldo = plan_acumulado_saldo - costo_venta_plan_acumulado
-        costo_venta_plan_acumulado_porcentaje = round(
-            (costo_venta_plan_acumulado * 100) / plan_acumulado_saldo, 1)
-        utilidad_bruta_plan_saldo_porcentaje = round(
-            (utilidad_bruta_plan_saldo * 100) / plan_acumulado_saldo, 1)
+        costo_venta_plan_acumulado_porcentaje = (
+            costo_venta_plan_acumulado * 100) / plan_acumulado_saldo
+        utilidad_bruta_plan_saldo_porcentaje = (
+            utilidad_bruta_plan_saldo * 100) / plan_acumulado_saldo
         costo_venta_plan_desviacion = costo_venta_plan_acumulado - costo_venta_acumulado
         utilidad_bruta_plan_desviacion = utilidad_bruta_acumulado_saldo - \
             utilidad_bruta_plan_saldo
-        costo_venta_plan_desviacion_porcentaje = round(
-            (costo_venta_plan_desviacion * 100) / costo_venta_plan_acumulado, 1)
-        utilidad_bruta_plan_desviacion_porcentaje = round(
-            (utilidad_bruta_plan_desviacion * 100) / utilidad_bruta_plan_saldo, 1)
-        accounts = ([6961, 6962, 6963, 6964, 6965, 6966, 6967, 6968,
-                     6969, 6970, 6972, 6973, 6974, 6975, 6976, 6977, 6978, 6979, 6980])
+        costo_venta_plan_desviacion_porcentaje = (
+            costo_venta_plan_desviacion * 100) / costo_venta_plan_acumulado
+        utilidad_bruta_plan_desviacion_porcentaje = (
+            utilidad_bruta_plan_desviacion * 100) / utilidad_bruta_plan_saldo
+
         costo_venta_debit_acumulado_last_year = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         costo_venta_credit_acumulado_last_year = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
-        costo_venta_last_year = round(
-            costo_venta_debit_acumulado_last_year - costo_venta_credit_acumulado_last_year, 0)
+        costo_venta_last_year = costo_venta_debit_acumulado_last_year - \
+            costo_venta_credit_acumulado_last_year
         costo_venta_last_year_saldo = rebajas_acumulado_last_year_saldo - costo_venta_last_year
-        costo_venta_last_year_porcentaje = round(
-            (costo_venta_last_year * 100) / rebajas_acumulado_last_year_saldo, 1)
-        costo_venta_last_year_saldo_porcentaje = round(
-            (costo_venta_last_year_saldo * 100) / rebajas_acumulado_last_year_saldo, 1)
+        costo_venta_last_year_porcentaje = (
+            costo_venta_last_year * 100) / rebajas_acumulado_last_year_saldo
+        costo_venta_last_year_saldo_porcentaje = (
+            costo_venta_last_year_saldo * 100) / rebajas_acumulado_last_year_saldo
 
-        accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        #accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        accounts = get_accounts('DEPRECIACIONES Y AMORTIZACIONES')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         depreciacion_amortizacion = total_debits - total_credits
-        accounts = ([6981, 6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
-                     6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
-                     7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
-                     7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
-                     7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
-                     7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
-                     7053, 7054, 7055])
+
+        # accounts = ([6981, 6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
+        #              6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
+        #              7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
+        #              7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
+        #              7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
+        #              7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
+        #              7053, 7054, 7055])
+        accounts = get_accounts('GASTOS DE OPERACION')
         gastos_operacion_debit = get_value_debit(
             accounts, date_start, date_stop)
         gastos_operacion_credit = get_value_credit(
@@ -274,7 +287,8 @@ class ErReportWizard(models.Model):
         gastos_operacion_desviacion = gastos_operacion_plan - gastos_operacion
         utilidad_operacion_desviacion = utilidad_operacion - utilidad_operacion_plan
 
-        accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        #accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        accounts = get_accounts('DEPRECIACIONES Y AMORTIZACIONES')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
@@ -282,13 +296,15 @@ class ErReportWizard(models.Model):
         depreciacion_amortizacion_acumulado = total_debits - total_credits
         depreciacion_amortizacion_acumulado_porcentaje = (
             depreciacion_amortizacion_acumulado * 100) / desviacion_rebajas
-        accounts = ([6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
-                     6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
-                     7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
-                     7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
-                     7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
-                     7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
-                     7053, 7054, 7055])
+
+        # accounts = ([6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
+        #              6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
+        #              7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
+        #              7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
+        #              7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
+        #              7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
+        #              7053, 7054, 7055])
+        accounts = get_accounts('GASTOS DE OPERACION')
         gastos_operacion_debit = get_value_debit(
             accounts, date_start_first_day, date_stop)
         gastos_operacion_credit = get_value_credit(
@@ -325,20 +341,22 @@ class ErReportWizard(models.Model):
         utilidad_operacion_plan_acumulado_desviacion_porcentaje = (
             utilidad_operacion_plan_acumulado_desviacion * 100) / utilidad_operacion_plan_acumulado
 
-        accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        #accounts = ([7132, 7133, 7134, 7135, 7136, 7137, 7138])
+        accounts = get_accounts('DEPRECIACIONES Y AMORTIZACIONES')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         depreciacion_amortizacion_last_year = total_debits - total_credits
 
-        accounts = ([6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
-                     6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
-                     7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
-                     7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
-                     7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
-                     7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
-                     7053, 7054, 7055])
+        # accounts = ([6982, 6983, 6984, 6985, 6986, 6987, 6988, 6989, 6990, 6991, 6992, 6993,
+        #              6994, 6995, 6996, 6997, 6998, 6999, 7000, 7001, 7002, 7003, 7004, 7005,
+        #              7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017,
+        #              7018, 7019, 7020, 7021, 7022, 7023, 7024, 7025, 7026, 7027, 7028, 7029,
+        #              7030, 7031, 7032, 7033, 7034, 7035, 7036, 7037, 7038, 7039, 6428, 7040,
+        #              7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049, 7050, 7051, 7052,
+        #              7053, 7054, 7055])
+        accounts = get_accounts('GASTOS DE OPERACION')
         gastos_operacion_debit = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         gastos_operacion_credit = get_value_credit(
@@ -353,32 +371,39 @@ class ErReportWizard(models.Model):
             gastos_operacion_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
         utilidad_operacion_acumulado_last_year_porcentaje = costo_venta_last_year_saldo_porcentaje - \
             gastos_operacion_acumulado_last_year_porcentaje
-        accounts = ([7139])
+
+        #accounts = ([7139])
+        accounts = get_accounts('PERDIDA CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         perdida_cambiaria = total_credits - total_debits
 
-        accounts = ([7140, 7141])
+        #accounts = ([7140, 7141])
+        accounts = get_accounts('INTERESES PAGADOS')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         intereses_pagados = total_credits - total_debits
 
-        accounts = ([7143])
+        #accounts = ([7143])
+        accounts = get_accounts('INGRESOS POR INTERES')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         ingresos_interes = total_credits - total_debits
-        accounts = ([7142])
+
+        #accounts = ([7142])
+        accounts = get_accounts('UTILIDAD CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         utilidad_cambiaria = total_credits - total_debits
+
         perdida_cambiaria_plan = get_value_plan(
             str_month, year_full, 'PERDIDA CAMBIARIA')
 
@@ -399,14 +424,17 @@ class ErReportWizard(models.Model):
         ingresos_interes_saldo = perdida_cambiaria_plan + \
             ingresos_interes_plan + utilidad_cambiaria_plan + intereses_pagados_plan
         utilidad_cambiaria_saldo = perdida_cambiaria_saldo - ingresos_interes_saldo
-        accounts = ([7139])
+
+        #accounts = ([7139])
+        accounts = get_accounts('PERDIDA CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
             accounts, date_start_first_day, date_stop)
         perdida_cambiaria_acumulado = total_credits - total_debits
 
-        accounts = ([7140, 7141])
+        #accounts = ([7140, 7141])
+        accounts = get_accounts('INTERESES PAGADOS')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
@@ -426,7 +454,8 @@ class ErReportWizard(models.Model):
         intereses_pagados_plan_desviacion_porcentaje = (
             intereses_pagados_plan_desviacion * 100) / ventas_netas_acumulado_desviacion
 
-        accounts = ([7140, 7141])
+        #accounts = ([7140, 7141])
+        accounts = get_accounts('INTERESES PAGADOS')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
@@ -435,13 +464,16 @@ class ErReportWizard(models.Model):
         intereses_pagados_acumulado_last_year_porcentaje = (
             intereses_pagados_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
 
-        accounts = ([7143])
+        #accounts = ([7143])
+        accounts = get_accounts('INGRESOS POR INTERES')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
             accounts, date_start_first_day, date_stop)
         ingresos_interes_acumulado = total_credits - total_debits
-        accounts = ([7142])
+
+        #accounts = ([7142])
+        accounts = get_accounts('UTILIDAD CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
@@ -491,19 +523,25 @@ class ErReportWizard(models.Model):
             utilidad_cambiaria_plan_acumulado_desviacion * 100) / utilidad_cambiaria_plan_acumulado
         utilidad_cambiaria_plan_acumulado_saldo_desviacion_porcentaje = (
             utilidad_cambiaria_plan_acumulado_saldo_desviacion * 100) / utilidad_cambiaria_plan_acumulado_saldo
-        accounts = ([7139])
+
+        #accounts = ([7139])
+        accounts = get_accounts('PERDIDA CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         perdida_cambiaria_acumulado_last_year = total_credits - total_debits
-        accounts = ([7143])
+
+        #accounts = ([7143])
+        accounts = get_accounts('INGRESOS POR INTERES')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         ingresos_interes_acumulado_last_year = total_credits - total_debits
-        accounts = ([7142])
+
+        #accounts = ([7142])
+        accounts = get_accounts('UTILIDAD CAMBIARIA')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
@@ -519,13 +557,17 @@ class ErReportWizard(models.Model):
             utilidad_cambiaria_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
         perdida_cambiaria_acumulado_last_year_saldo_porcentaje = (
             perdida_cambiaria_acumulado_last_year_saldo * 100) / rebajas_acumulado_last_year_saldo
-        accounts = ([7144])
+
+        #accounts = ([7144])
+        accounts = get_accounts('OTROS GASTOS')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         otros_gastos = total_debits - total_credits
-        accounts = ([6960])
+
+        #accounts = ([6960])
+        accounts = get_accounts('OTROS INGRESOS')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
@@ -544,13 +586,17 @@ class ErReportWizard(models.Model):
         utilidad_antes_impuestos_desviacion = utilidad_operacion_desviacion + \
             utilidad_cambiaria_saldo + \
             (otros_ingresos_desviacion - otros_gastos_desviacion)
-        accounts = ([7144])
+
+        #accounts = ([7144])
+        accounts = get_accounts('OTROS GASTOS')
         total_debit = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credit = get_value_credit(
             accounts, date_start_first_day, date_stop)
         otros_gastos_acumulado = total_debit - total_credit
-        accounts = ([6960])
+
+        #accounts = ([6960])
+        accounts = get_accounts('OTROS INGRESOS')
         total_debit = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credit = get_value_credit(
@@ -593,33 +639,41 @@ class ErReportWizard(models.Model):
             otros_ingresos_plan_acumulado_desviacion * 100) / otros_ingresos_plan_acumulado
         utilidad_antes_impuestos_plan_acumulado_desviacion_porcentaje = (
             utilidad_antes_impuestos_plan_acumulado_desviacion * 100) / utilidad_antes_impuestos_plan_acumulado
-        accounts = ([7144])
+
+        #accounts = ([7144])
+        accounts = get_accounts('OTROS GASTOS')
         total_debit = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credit = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         otros_gastos_acumulado_last_year = total_debit - total_credit
-        accounts = ([6960])
+
+        #accounts = ([6960])
+        accounts = get_accounts('OTROS INGRESOS')
         total_debit = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credit = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         otros_ingresos_acumulado_last_year = total_credit - total_debit
-        utilidad_antes_impuestos_plan_acumulado_last_year = utilidad_operacion_acumulado_last_year + perdida_cambiaria_acumulado_last_year_saldo + (otros_ingresos_acumulado_last_year -
-                                                                                                                                                    otros_gastos_acumulado_last_year)
+        utilidad_antes_impuestos_plan_acumulado_last_year = utilidad_operacion_acumulado_last_year + perdida_cambiaria_acumulado_last_year_saldo + (otros_ingresos_acumulado_last_year
+                                                                                                                                                    - otros_gastos_acumulado_last_year)
         otros_gastos_acumulado_last_year_porcentaje = (
             otros_gastos_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
         otros_ingresos_acumulado_last_year_porcentaje = (
             otros_ingresos_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
         utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje = (
             utilidad_antes_impuestos_plan_acumulado_last_year * 100) / rebajas_acumulado_last_year_saldo
-        accounts = ([7131])
+
+        #accounts = ([7131])
+        accounts = get_accounts('ISR')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
             accounts, date_start, date_stop)
         isr = total_debits - total_credits
-        accounts = ([6924])
+
+        #accounts = ([6924])
+        accounts = get_accounts('PTU')
         total_debits = get_value_debit(
             accounts, date_start, date_stop)
         total_credits = get_value_credit(
@@ -634,13 +688,17 @@ class ErReportWizard(models.Model):
         isr_ptu = isr + ptu
         isr_plan_ptu_plan = isr_plan + ptu_plan
         isr_desviacion_ptu_desviacion = isr_desviacion + ptu_desviacion
-        accounts = ([7131])
+
+        #accounts = ([7131])
+        accounts = get_accounts('ISR')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
             accounts, date_start_first_day, date_stop)
         isr_acumulado = total_debits - total_credits
-        accounts = ([6924])
+
+        #accounts = ([6924])
+        accounts = get_accounts('PTU')
         total_debits = get_value_debit(
             accounts, date_start_first_day, date_stop)
         total_credits = get_value_credit(
@@ -671,13 +729,17 @@ class ErReportWizard(models.Model):
             ptu_plan_desviacion * 100) / ptu_plan_acumulado
         isr_plan_ptu_plan_desviacion_porcentaje = (
             isr_plan_ptu_plan_desviacion * 100) / isr_plan_ptu_plan_acumulado
-        accounts = ([7131])
+
+        #accounts = ([7131])
+        accounts = get_accounts('ISR')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
             accounts, date_start_last_year, date_end_last_year)
         isr_acumulado_last_year = total_debits - total_credits
-        accounts = ([6924])
+
+        #accounts = ([6924])
+        accounts = get_accounts('PTU')
         total_debits = get_value_debit(
             accounts, date_start_last_year, date_end_last_year)
         total_credits = get_value_credit(
@@ -777,7 +839,7 @@ class ErReportWizard(models.Model):
             'desviacion_rebajas': round(desviacion_rebajas, 0),
             'plan_acumulado_saldo': round(plan_acumulado_saldo, 0),
             'ventas_netas_acumulado_desviacion': round(ventas_netas_acumulado_desviacion, 0),
-            'desviacion_rebajas_desviacion_procentaje': round(desviacion_rebajas_desviacion_procentaje, 0),
+            'desviacion_rebajas_desviacion_procentaje': round(desviacion_rebajas_desviacion_procentaje, 1),
             'rebajas_acumulado_last_year_saldo': round(rebajas_acumulado_last_year_saldo, 0),
 
             'costo_venta_real': round(costo_venta_real, 0),
@@ -997,11 +1059,11 @@ class ErReportWizard(models.Model):
         # return {
         #     'type': 'ir.actions.act_window',
         #     'res_model': 'er.report.wizard',
-        #     'view_mode': 'form',
-        #     'view_type': 'form',
+        #     'view_mode': 'list',
+        #     'view_type': 'list',
         #     'res_id': self.id,
-        #     'views': [(False, 'form')],
-        #     'target': 'new',
+        #     'views': [(False, 'list')],
+        #     # 'target': 'new',
         # }
 
 

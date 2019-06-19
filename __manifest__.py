@@ -9,7 +9,7 @@
     'author': "gflores",
     'website': "https://www.gruporequiez.com",
     'category': 'Account',
-    'version': '0.2.0',
+    'version': '0.3.0',
     'depends': [
         'account',
         'sale_brand'],
@@ -17,6 +17,7 @@
         # views
         'wizard/er_report_wizard.xml',
         'views/er_plan_estado_resultado_view.xml',
+        'views/er_cuentas_estado_resultado_view.xml',
         # reports
         'reports/er_report_template.xml',
         # data
