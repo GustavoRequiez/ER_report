@@ -1,0 +1,1305 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* ER_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-22 16:52+0000\n"
+"PO-Revision-Date: 2019-06-22 16:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "100.0%"
+msgstr "100.0%"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "<strong>(Cifras en pesos)</strong>"
+msgstr "<strong>(Cifras en pesos)</strong>"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "<strong>Estado de Resultados</strong>"
+msgstr "<strong>Estado de Resultados</strong>"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "ABRIL"
+msgstr "ABRIL"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "ACUMULADO"
+msgstr "ACUMULADO"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "AF"
+msgstr "AF"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "AGOSTO"
+msgstr "AGOSTO"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_account_ids
+msgid "Accounts"
+msgstr "Cuentas"
+
+#. module: ER_report
+#: model:ir.actions.act_window,name:ER_report.er_cuentas_estado_resultados_action
+#: model:ir.ui.menu,name:ER_report.menu_er_cuentas_estado_resultados
+#: model:ir.ui.view,arch_db:ER_report.er_cuentas_view_form
+#: model:ir.ui.view,arch_db:ER_report.er_cuentas_view_tree
+msgid "Accounts Income Statement"
+msgstr "Cuentas Estado de Resultados"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado_desviacion
+msgid "Acumulado Desviacion"
+msgstr "Acumulado Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_brand_id
+msgid "Brand"
+msgstr "Marca"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+msgid "COSTO DE VENTA"
+msgstr "COSTO DE VENTA"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "COSTO DE VENTAS"
+msgstr "COSTO DE VENTAS"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.er_report_wizard_view_form
+msgid "Calculate"
+msgstr "Calcular"
+
+#. module: ER_report
+#: model:ir.actions.act_window,help:ER_report.er_cuentas_estado_resultados_action
+msgid "Click to set a new list."
+msgstr "Click to set a new list."
+
+#. module: ER_report
+#: model:ir.actions.act_window,help:ER_report.er_plan_estado_resultados_action
+msgid "Click to set a new value of a plan."
+msgstr "Click para crear."
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_real
+msgid "Costo Venta"
+msgstr "Costo Venta"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_plan
+msgid "Costo_venta_plan"
+msgstr "Costo_venta_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_create_uid
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_create_uid
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_create_uid
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_create_date
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_create_date
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_create_date
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "DEPRECIACIONES Y AMORTIZACIONES"
+msgstr "DEPRECIACIONES Y AMORTIZACIONES"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "DESVIACIÓN"
+msgstr "DESVIACIÓN"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "DICIEMBRE"
+msgstr "DICIEMBRE"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_date_end
+msgid "Date End"
+msgstr "Fecha final"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_date_start
+msgid "Date Start"
+msgstr "Fecha inicial"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_desviacion_rebajas
+msgid "Desviacion Rebajas"
+msgstr "Desviacion Rebajas"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_statement_income_data
+msgid "Details"
+msgstr "Detalles"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_display_name
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_display_name
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_display_name
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "EBITDA DEL PERIODO"
+msgstr "EBITDA DEL PERIODO"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "ENERO"
+msgstr "ENERO"
+
+#. module: ER_report
+#: model:ir.actions.act_window,name:ER_report.er_report_action
+#: model:ir.actions.report,name:ER_report.print_statement_report_pdf
+#: model:ir.ui.view,arch_db:ER_report.er_report_wizard_view_form
+#: model:ir.ui.view,arch_db:ER_report.er_report_wizard_view_tree
+msgid "ER Report"
+msgstr "Estado de Resultados"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "FEBRERO"
+msgstr "FEBRERO"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "GASTOS DE ADMINISTRACIÓN Y VENTAS"
+msgstr "GASTOS DE ADMINISTRACIÓN Y VENTAS"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+msgid "GASTOS DE OPERACION"
+msgstr "GASTOS DE OPERACION"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "GASTOS DE OPERACION:"
+msgstr "GASTOS DE OPERACION:"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "GR"
+msgstr "GR"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "GRUPO REQUIEZ SA de CV"
+msgstr "GRUPO REQUIEZ SA de CV"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.plan_search_view
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_id
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_id
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_id
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_id
+msgid "ID"
+msgstr "ID"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "IMPUESTOS SOBRE LA RENTA"
+msgstr "IMPUESTOS SOBRE LA RENTA"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+msgid "INGRESOS POR INTERES"
+msgstr "INGRESOS POR INTERES"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "INTERESES GANADOS"
+msgstr "INTERESES GANADOS"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "INTERESES PAGADOS"
+msgstr "INTERESES PAGADOS"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+msgid "ISR"
+msgstr "ISR"
+
+#. module: ER_report
+#: model:ir.ui.menu,name:ER_report.menu_er_report_wizard
+msgid "Income Statement"
+msgstr "Income Statement"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "JULIO"
+msgstr "JULIO"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "JUNIO"
+msgstr "JUNIO"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados___last_update
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados___last_update
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard___last_update
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_write_uid
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_write_uid
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_write_uid
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_write_date
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_write_date
+#: model:ir.model.fields,field_description:ER_report.field_er_report_wizard_write_date
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "MARZO"
+msgstr "MARZO"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "MAYO"
+msgstr "MAYO"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "MES"
+msgstr "MES"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "MMC"
+msgstr "MMC"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_name
+#: model:ir.ui.view,arch_db:ER_report.plan_search_view
+msgid "Month"
+msgstr "Mes"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "NOVIEMBRE"
+msgstr "NOVIEMBRE"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_cuentas_estado_resultados_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: ER_report
+#: model:ir.actions.act_window,help:ER_report.er_report_action
+msgid "Nuevo."
+msgstr "Nuevo."
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "OCTUBRE"
+msgstr "OCTUBRE"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "OTROS GASTOS"
+msgstr "OTROS GASTOS"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "OTROS INGRESOS"
+msgstr "OTROS INGRESOS"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "OTROS INGRESOS Y GASTOS"
+msgstr "OTROS INGRESOS Y GASTOS"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "PERDIDA CAMBIARIA"
+msgstr "PERDIDA CAMBIARIA"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "PLAN"
+msgstr "PLAN"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "PTU"
+msgstr "PTU"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_plan
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan
+#: model:ir.ui.view,arch_db:ER_report.plan_search_view
+msgid "Plan"
+msgstr "Plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_acumulado
+msgid "Plan Acumulado"
+msgstr "Plan Acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_acumulado_saldo
+msgid "Plan Acumulado Saldo"
+msgstr "Plan Acumulado Saldo"
+
+#. module: ER_report
+#: model:ir.actions.act_window,name:ER_report.er_plan_estado_resultados_action
+#: model:ir.ui.menu,name:ER_report.menu_er_plan_estado_resultados
+#: model:ir.ui.view,arch_db:ER_report.er_plan_view_form
+#: model:ir.ui.view,arch_db:ER_report.er_plan_view_tree
+msgid "Plan Income Statement"
+msgstr "Plan Estado de Resultados"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "Por los meses que corresponden del"
+msgstr "Por los meses que corresponden del"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_last_year_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_ptu_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_ptu_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_ptu_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_ptu_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_last_year_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_acumulado_rebajas_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_acumulado_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_saldo_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_saldo_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_desviacion_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_plan_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado_desviacion_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado_last_year_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado_porcentaje
+msgid "Porcentaje"
+msgstr "Porcentaje"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_desviacion_rebajas_desviacion_procentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_procentaje
+msgid "Procentaje"
+msgstr "Procentaje"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "REAL"
+msgstr "REAL"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "REBAJAS Y DEVOLUCIONES"
+msgstr "REBAJAS Y DEVOLUCIONES"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "RESULTADO INTEGRAL DE FINANCIAMIENTO"
+msgstr "RESULTADO INTEGRAL DE FINANCIAMIENTO"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado
+msgid "Rebajas Acumulado"
+msgstr "Rebajas Acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_last_year
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_last_year_saldo
+msgid "Rebajas Acumulado Año Anterior"
+msgstr "Rebajas Acumulado Año Anterior"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_acumulado_desviacion
+msgid "Rebajas Acumulado Desviacion"
+msgstr "Rebajas Acumulado Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas_desviacion
+msgid "Rebajas Desviacion"
+msgstr "Rebajas Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_rebajas
+msgid "Rebajas Plan"
+msgstr "Rebajas Plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_acumulado_rebajas
+msgid "Rebajas Plan Acumulado"
+msgstr "Rebajas Plan Acumulado"
+
+#. module: ER_report
+#: selection:er.plan.estado.resultados,name:0
+msgid "SEPTIEMBRE"
+msgstr "SEPTIEMBRE"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_er_report_id
+msgid "Statement"
+msgstr "Extracto"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "UTILIDAD ANTES DE IMPUESTOS"
+msgstr "UTILIDAD ANTES DE IMPUESTOS"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "UTILIDAD BRUTA"
+msgstr "UTILIDAD BRUTA"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "UTILIDAD CAMBIARIA"
+msgstr "UTILIDAD CAMBIARIA"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "UTILIDAD DE OPERACIÓN"
+msgstr "UTILIDAD DE OPERACIÓN"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "UTILIDAD NETA"
+msgstr "UTILIDAD NETA"
+
+#. module: ER_report
+#: selection:er.cuentas.estado.resultados,name:0
+#: selection:er.plan.estado.resultados,plan:0
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "VENTAS"
+msgstr "VENTAS"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "VENTAS NETAS"
+msgstr "VENTAS NETAS"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_value
+msgid "Value"
+msgstr "Valor"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas
+msgid "Ventas"
+msgstr "Ventas"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado
+msgid "Ventas Acumulado"
+msgstr "Ventas Acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_acumulado_last_year
+msgid "Ventas Año Anterior"
+msgstr "Ventas Año Anterior"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_desviacion
+msgid "Ventas Desviacion"
+msgstr "Ventas Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_netas
+msgid "Ventas Netas"
+msgstr "Ventas Netas"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_netas_acumulado_desviacion
+msgid "Ventas Netas Acumulado Desviacion"
+msgstr "Ventas Netas Acumulado Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ventas_netas_desviacion
+msgid "Ventas Netas Desviacion"
+msgstr "Ventas Netas Desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_plan_saldo
+msgid "Ventas Netas Saldo"
+msgstr "Ventas Netas Saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_er_plan_estado_resultados_year
+#: model:ir.ui.view,arch_db:ER_report.plan_search_view
+msgid "Year"
+msgstr "Año"
+
+#. module: ER_report
+#: model:ir.ui.view,arch_db:ER_report.statement_report_pdf_view
+msgid "al"
+msgstr "al"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_codigo
+msgid "codigo"
+msgstr "codigo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_acumulado
+msgid "costo_venta_acumulado"
+msgstr "costo_venta_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_desviacion
+msgid "costo_venta_desviacion"
+msgstr "costo_venta_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_last_year
+msgid "costo_venta_last_year"
+msgstr "costo_venta_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_last_year_saldo
+msgid "costo_venta_last_year_saldo"
+msgstr "costo_venta_last_year_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_plan_acumulado
+msgid "costo_venta_plan_acumulado"
+msgstr "costo_venta_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_plan_desviacion
+msgid "costo_venta_plan_desviacion"
+msgstr "costo_venta_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_date_end_last_day
+msgid "date_end_last_day"
+msgstr "date_end_last_day"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_date_start_first_day
+msgid "date_start_first_day"
+msgstr "date_start_first_day"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion
+msgid "depreciacion_amortizacion"
+msgstr "depreciacion_amortizacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_acumulado
+msgid "depreciacion_amortizacion_acumulado"
+msgstr "depreciacion_amortizacion_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_last_year
+msgid "depreciacion_amortizacion_last_year"
+msgstr "depreciacion_amortizacion_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_depreciacion_amortizacion_plan_acumulado
+msgid "depreciacion_amortizacion_plan_acumulado"
+msgstr "depreciacion_amortizacion_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo
+msgid "ebitda_periodo"
+msgstr "ebitda_periodo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_acumulado
+msgid "ebitda_periodo_acumulado"
+msgstr "ebitda_periodo_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_acumulado_last_year
+msgid "ebitda_periodo_acumulado_last_year"
+msgstr "ebitda_periodo_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_plan_acumulado
+msgid "ebitda_periodo_plan_acumulado"
+msgstr "ebitda_periodo_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model,name:ER_report.model_er_cuentas_estado_resultados
+msgid "er.cuentas.estado.resultados"
+msgstr "er.cuentas.estado.resultados"
+
+#. module: ER_report
+#: model:ir.model,name:ER_report.model_er_plan_estado_resultados
+msgid "er.plan.estado.resultados"
+msgstr "er.plan.estado.resultados"
+
+#. module: ER_report
+#: model:ir.model,name:ER_report.model_er_report_wizard
+msgid "er.report.wizard"
+msgstr "er.report.wizard"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion
+msgid "gastos_operacion"
+msgstr "gastos_operacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_acumulado
+msgid "gastos_operacion_acumulado"
+msgstr "gastos_operacion_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_acumulado_last_year
+msgid "gastos_operacion_acumulado_last_year"
+msgstr "gastos_operacion_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_desviacion
+msgid "gastos_operacion_desviacion"
+msgstr "gastos_operacion_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_plan
+msgid "gastos_operacion_plan"
+msgstr "gastos_operacion_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_plan_acumulado
+msgid "gastos_operacion_plan_acumulado"
+msgstr "gastos_operacion_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_gastos_operacion_plan_acumulado_desviacion
+msgid "gastos_operacion_plan_acumulado_desviacion"
+msgstr "gastos_operacion_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes
+msgid "ingresos_interes"
+msgstr "ingresos_interes"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_acumulado
+msgid "ingresos_interes_acumulado"
+msgstr "ingresos_interes_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_acumulado_last_year
+msgid "ingresos_interes_acumulado_last_year"
+msgstr "ingresos_interes_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_desviacion
+msgid "ingresos_interes_desviacion"
+msgstr "ingresos_interes_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_plan
+msgid "ingresos_interes_plan"
+msgstr "ingresos_interes_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_plan_acumulado
+msgid "ingresos_interes_plan_acumulado"
+msgstr "ingresos_interes_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_plan_acumulado_desviacion
+msgid "ingresos_interes_plan_acumulado_desviacion"
+msgstr "ingresos_interes_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_plan_acumulado_desviacion_porcentaje
+msgid "ingresos_interes_plan_acumulado_desviacion_porcentaje"
+msgstr "ingresos_interes_plan_acumulado_desviacion_porcentaje"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ingresos_interes_saldo
+msgid "ingresos_interes_saldo"
+msgstr "ingresos_interes_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados
+msgid "intereses_pagados"
+msgstr "intereses_pagados"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_acumulado
+msgid "intereses_pagados_acumulado"
+msgstr "intereses_pagados_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_acumulado_last_year
+msgid "intereses_pagados_acumulado_last_year"
+msgstr "intereses_pagados_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_desviacion
+msgid "intereses_pagados_desviacion"
+msgstr "intereses_pagados_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_plan
+msgid "intereses_pagados_plan"
+msgstr "intereses_pagados_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_plan_acumulado
+msgid "intereses_pagados_plan_acumulado"
+msgstr "intereses_pagados_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_intereses_pagados_plan_desviacion
+msgid "intereses_pagados_plan_desviacion"
+msgstr "intereses_pagados_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr
+msgid "isr"
+msgstr "isr"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_acumulado
+msgid "isr_acumulado"
+msgstr "isr_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_acumulado_last_year
+msgid "isr_acumulado_last_year"
+msgstr "isr_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_desviacion
+msgid "isr_desviacion"
+msgstr "isr_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_desviacion_ptu_desviacion
+msgid "isr_desviacion_ptu_desviacion"
+msgstr "isr_desviacion_ptu_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan
+msgid "isr_plan"
+msgstr "isr_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_acumulado
+msgid "isr_plan_acumulado"
+msgstr "isr_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_desviacion
+msgid "isr_plan_desviacion"
+msgstr "isr_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_ptu_plan
+msgid "isr_plan_ptu_plan"
+msgstr "isr_plan_ptu_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_ptu_plan_acumulado
+msgid "isr_plan_ptu_plan_acumulado"
+msgstr "isr_plan_ptu_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_plan_ptu_plan_desviacion
+msgid "isr_plan_ptu_plan_desviacion"
+msgstr "isr_plan_ptu_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_ptu
+msgid "isr_ptu"
+msgstr "isr_ptu"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_ptu_acumulado
+msgid "isr_ptu_acumulado"
+msgstr "isr_ptu_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_isr_ptu_acumulado_last_year
+msgid "isr_ptu_acumulado_last_year"
+msgstr "isr_ptu_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_last_year_report
+msgid "last_year_report"
+msgstr "last_year_report"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos
+msgid "otros_gastos"
+msgstr "otros_gastos"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_acumulado
+msgid "otros_gastos_acumulado"
+msgstr "otros_gastos_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_acumulado_last_year
+msgid "otros_gastos_acumulado_last_year"
+msgstr "otros_gastos_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_desviacion
+msgid "otros_gastos_desviacion"
+msgstr "otros_gastos_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_plan
+msgid "otros_gastos_plan"
+msgstr "otros_gastos_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_plan_acumulado
+msgid "otros_gastos_plan_acumulado"
+msgstr "otros_gastos_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_gastos_plan_acumulado_desviacion
+msgid "otros_gastos_plan_acumulado_desviacion"
+msgstr "otros_gastos_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos
+msgid "otros_ingresos"
+msgstr "otros_ingresos"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_acumulado
+msgid "otros_ingresos_acumulado"
+msgstr "otros_ingresos_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_acumulado_last_year
+msgid "otros_ingresos_acumulado_last_year"
+msgstr "otros_ingresos_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_desviacion
+msgid "otros_ingresos_desviacion"
+msgstr "otros_ingresos_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_plan
+msgid "otros_ingresos_plan"
+msgstr "otros_ingresos_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_plan_acumulado
+msgid "otros_ingresos_plan_acumulado"
+msgstr "otros_ingresos_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_otros_ingresos_plan_acumulado_desviacion
+msgid "otros_ingresos_plan_acumulado_desviacion"
+msgstr "otros_ingresos_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria
+msgid "perdida_cambiaria"
+msgstr "perdida_cambiaria"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado
+msgid "perdida_cambiaria_acumulado"
+msgstr "perdida_cambiaria_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_last_year
+msgid "perdida_cambiaria_acumulado_last_year"
+msgstr "perdida_cambiaria_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_last_year_saldo
+msgid "perdida_cambiaria_acumulado_last_year_saldo"
+msgstr "perdida_cambiaria_acumulado_last_year_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_acumulado_saldo
+msgid "perdida_cambiaria_acumulado_saldo"
+msgstr "perdida_cambiaria_acumulado_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_desviacion
+msgid "perdida_cambiaria_desviacion"
+msgstr "perdida_cambiaria_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_plan
+msgid "perdida_cambiaria_plan"
+msgstr "perdida_cambiaria_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_plan_acumulado
+msgid "perdida_cambiaria_plan_acumulado"
+msgstr "perdida_cambiaria_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_plan_acumulado_desviacion
+msgid "perdida_cambiaria_plan_acumulado_desviacion"
+msgstr "perdida_cambiaria_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_perdida_cambiaria_saldo
+msgid "perdida_cambiaria_saldo"
+msgstr "perdida_cambiaria_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_costo_venta_plan_acumulado_porcentaje
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ebitda_periodo_porcentaje
+msgid "porcentaje"
+msgstr "porcentaje"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu
+msgid "ptu"
+msgstr "ptu"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_acumulado
+msgid "ptu_acumulado"
+msgstr "ptu_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_acumulado_last_year
+msgid "ptu_acumulado_last_year"
+msgstr "ptu_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_desviacion
+msgid "ptu_desviacion"
+msgstr "ptu_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_plan
+msgid "ptu_plan"
+msgstr "ptu_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_plan_acumulado
+msgid "ptu_plan_acumulado"
+msgstr "ptu_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_ptu_plan_desviacion
+msgid "ptu_plan_desviacion"
+msgstr "ptu_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_rebajas
+msgid "rebajas"
+msgstr "rebajas"
+
+#. module: ER_report
+#: model:ir.model,name:ER_report.model_statement_income_detail
+msgid "statement.income.detail"
+msgstr "statement.income.detail"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos
+msgid "utilidad_antes_impuestos"
+msgstr "utilidad_antes_impuestos"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_acumulado
+msgid "utilidad_antes_impuestos_acumulado"
+msgstr "utilidad_antes_impuestos_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_desviacion
+msgid "utilidad_antes_impuestos_desviacion"
+msgstr "utilidad_antes_impuestos_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan
+msgid "utilidad_antes_impuestos_plan"
+msgstr "utilidad_antes_impuestos_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado
+msgid "utilidad_antes_impuestos_plan_acumulado"
+msgstr "utilidad_antes_impuestos_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado_desviacion
+msgid "utilidad_antes_impuestos_plan_acumulado_desviacion"
+msgstr "utilidad_antes_impuestos_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_antes_impuestos_plan_acumulado_last_year
+msgid "utilidad_antes_impuestos_plan_acumulado_last_year"
+msgstr "utilidad_antes_impuestos_plan_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_acumulado_saldo
+msgid "utilidad_bruta_acumulado_saldo"
+msgstr "utilidad_bruta_acumulado_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_desviacion
+msgid "utilidad_bruta_desviacion"
+msgstr "utilidad_bruta_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan
+msgid "utilidad_bruta_plan"
+msgstr "utilidad_bruta_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan_desviacion
+msgid "utilidad_bruta_plan_desviacion"
+msgstr "utilidad_bruta_plan_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan_procentaje
+msgid "utilidad_bruta_plan_procentaje"
+msgstr "utilidad_bruta_plan_procentaje"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_plan_saldo
+msgid "utilidad_bruta_plan_saldo"
+msgstr "utilidad_bruta_plan_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_bruta_real
+msgid "utilidad_bruta_real"
+msgstr "utilidad_bruta_real"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria
+msgid "utilidad_cambiaria"
+msgstr "utilidad_cambiaria"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_acumulado
+msgid "utilidad_cambiaria_acumulado"
+msgstr "utilidad_cambiaria_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_acumulado_last_year
+msgid "utilidad_cambiaria_acumulado_last_year"
+msgstr "utilidad_cambiaria_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_desviacion
+msgid "utilidad_cambiaria_desviacion"
+msgstr "utilidad_cambiaria_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan
+msgid "utilidad_cambiaria_plan"
+msgstr "utilidad_cambiaria_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado
+msgid "utilidad_cambiaria_plan_acumulado"
+msgstr "utilidad_cambiaria_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_desviacion
+msgid "utilidad_cambiaria_plan_acumulado_desviacion"
+msgstr "utilidad_cambiaria_plan_acumulado_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_saldo
+msgid "utilidad_cambiaria_plan_acumulado_saldo"
+msgstr "utilidad_cambiaria_plan_acumulado_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_plan_acumulado_saldo_desviacion
+msgid "utilidad_cambiaria_plan_acumulado_saldo_desviacion"
+msgstr "utilidad_cambiaria_plan_acumulado_saldo_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_cambiaria_saldo
+msgid "utilidad_cambiaria_saldo"
+msgstr "utilidad_cambiaria_saldo"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta
+msgid "utilidad_neta"
+msgstr "utilidad_neta"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_acumulado
+msgid "utilidad_neta_acumulado"
+msgstr "utilidad_neta_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_desviacion
+msgid "utilidad_neta_desviacion"
+msgstr "utilidad_neta_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_desviacion_acumulado
+msgid "utilidad_neta_desviacion_acumulado"
+msgstr "utilidad_neta_desviacion_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_last_year
+msgid "utilidad_neta_last_year"
+msgstr "utilidad_neta_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_plan
+msgid "utilidad_neta_plan"
+msgstr "utilidad_neta_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_neta_plan_acumulado
+msgid "utilidad_neta_plan_acumulado"
+msgstr "utilidad_neta_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion
+msgid "utilidad_operacion"
+msgstr "utilidad_operacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_acumulado
+msgid "utilidad_operacion_acumulado"
+msgstr "utilidad_operacion_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_acumulado_last_year
+msgid "utilidad_operacion_acumulado_last_year"
+msgstr "utilidad_operacion_acumulado_last_year"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_desviacion
+msgid "utilidad_operacion_desviacion"
+msgstr "utilidad_operacion_desviacion"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_plan
+msgid "utilidad_operacion_plan"
+msgstr "utilidad_operacion_plan"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_plan_acumulado
+msgid "utilidad_operacion_plan_acumulado"
+msgstr "utilidad_operacion_plan_acumulado"
+
+#. module: ER_report
+#: model:ir.model.fields,field_description:ER_report.field_statement_income_detail_utilidad_operacion_plan_acumulado_desviacion
+msgid "utilidad_operacion_plan_acumulado_desviacion"
+msgstr "utilidad_operacion_plan_acumulado_desviacion"
