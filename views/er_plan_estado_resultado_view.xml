@@ -5,7 +5,7 @@
     <field name="model">er.plan.estado.resultados</field>
     <field name="type">form</field>
     <field name="arch" type="xml">
-      <form string="Plan Estado de Resultados">
+      <form string="Plan Income Statement">
         <group>
           <group>
             <field name="plan"/>
@@ -24,7 +24,7 @@
     <field name="name">er.plan.estado.resultados.view.tree</field>
     <field name="model">er.plan.estado.resultados</field>
     <field name="arch" type="xml">
-      <tree string="Plan Estado de Resultados">
+      <tree string="Plan Income Statement">
         <field name="plan"/>
         <field name="name"/>
         <field name="brand_id"/>
@@ -35,7 +35,7 @@
   </record>
 
   <record id="er_plan_estado_resultados_action" model="ir.actions.act_window">
-    <field name="name">Plan Estado de Resultados</field>
+    <field name="name">Plan Income Statement</field>
     <field name="res_model">er.plan.estado.resultados</field>
     <field name="view_mode">tree,form</field>
     <field name="help" type="html">
@@ -49,10 +49,10 @@
     <field name="arch" type="xml">
       <search>
         <group string="Group By">
-          <filter name="Mes" string="Mes" context="{'group_by': 'name'}"/>
+          <filter name="month" string="Month" context="{'group_by': 'name'}"/>
         </group>
         <group string="Group By">
-          <filter name="Año" string="Año" context="{'group_by': 'year'}"/>
+          <filter name="Year" string="Year" context="{'group_by': 'year'}"/>
         </group>
         <group string="Group By">
           <filter name="Plan" string="Plan" context="{'group_by': 'plan'}"/>
@@ -61,5 +61,5 @@
     </field>
   </record>
 
-  <menuitem id="menu_er_plan_estado_resultados" name="Plan Estado de Resultados" sequence="21" parent="account.account_reports_management_menu" action="er_plan_estado_resultados_action"/>
+  <menuitem id="menu_er_plan_estado_resultados" name="Plan Income Statement" sequence="21" parent="account.account_reports_management_menu" action="er_plan_estado_resultados_action"/>
 </odoo>

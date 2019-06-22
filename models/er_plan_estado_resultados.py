@@ -18,10 +18,10 @@ class ERplan(models.Model):
         ('SEPTIEMBRE', 'SEPTIEMBRE'),
         ('OCTUBRE', 'OCTUBRE'),
         ('NOVIEMBRE', 'NOVIEMBRE'),
-        ('DICIEMBRE', 'DICIEMBRE')], string="Mes", required=True)
-    year = fields.Char(string='Año', required=True)
-    brand_id = fields.Many2one('product.brand', string='Marca', required=True)
-    value = fields.Float(string='Valor', required=True)
+        ('DICIEMBRE', 'DICIEMBRE')], string="Month", required=True)
+    year = fields.Char(string='Year', required=True)
+    brand_id = fields.Many2one('product.brand', string='Brand', required=True)
+    value = fields.Float(string='Value', required=True)
     plan = fields.Selection([
         ('VENTAS', 'VENTAS'),
         ('REBAJAS Y DEVOLUCIONES', 'REBAJAS Y DEVOLUCIONES'),

@@ -19,6 +19,6 @@ class ERCuentas(models.Model):
         ('ISR', 'ISR'),
         ('PTU', 'PTU'),
         ('DEPRECIACIONES Y AMORTIZACIONES', 'DEPRECIACIONES Y AMORTIZACIONES'),
-        ('INTERESES PAGADOS', 'INTERESES PAGADOS')], string='Cuenta', required=True, default='VENTAS')
+        ('INTERESES PAGADOS', 'INTERESES PAGADOS')], string='Name', required=True, default='VENTAS')
     account_ids = fields.Many2many(
-        'account.account', 'name', 'code', 'gid', 'Cuenta')
+        'account.account', 'name', 'code', 'gid', 'Accounts')

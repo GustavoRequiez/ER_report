@@ -10,9 +10,9 @@ class ErReportWizard(models.Model):
     _name = 'er.report.wizard'
 
     date_start = fields.Date(
-        string="Fecha Inicio", required=True, default=fields.Date.today)  # default=fields.Date.today
+        string="Date Start", required=True, default=fields.Date.today)  # default=fields.Date.today
     date_end = fields.Date(
-        string="Fechas Fin", required=True, default=fields.Date.today)
+        string="Date End", required=True, default=fields.Date.today)
 
     statement_income_data = fields.One2many(
         'statement.income.detail',
@@ -1102,7 +1102,7 @@ class StatementIncomeDetail(models.Model):
 
     plan_rebajas = fields.Float(string='Rebajas Plan', readonly=True)
     rebajas_desviacion = fields.Float(
-        string='Debajas Desviacion', readonly=True)
+        string='Rebajas Desviacion', readonly=True)
     rebajas_acumulado = fields.Float(string='Rebajas Acumulado', readonly=True)
     rebajas_acumulado_procentaje = fields.Float(
         string='Procentaje', readonly=True)

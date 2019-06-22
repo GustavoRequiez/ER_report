@@ -18,7 +18,7 @@
           </field>
         </group>
         <footer>
-          <button name="get_report" string="Calcular" type="object" class="oe_highlight"/>
+          <button name="get_report" string="Calculate" type="object" class="oe_highlight"/>
         </footer>
       </form>
     </field>
@@ -49,6 +49,6 @@
     </field>
   </record>
 
-  <menuitem id="menu_er_report_wizard" name="Estado de Resultados" sequence="22" parent="account.account_reports_management_menu" action="er_report_action"/>
+  <menuitem id="menu_er_report_wizard" name="Income Statement" sequence="22" parent="account.account_reports_management_menu" action="er_report_action"/>
 
 </odoo>
