@@ -825,7 +825,7 @@ class ErReportWizard(models.Model):
             'plan_rebajas': round(plan_rebajas, 0),
             'rebajas_desviacion': round(rebajas_desviacion, 0),
             'rebajas_acumulado': round(rebajas_acumulado, 0),
-            'rebajas_acumulado_procentaje': round(rebajas_acumulado_procentaje, 0),
+            'rebajas_acumulado_procentaje': round(rebajas_acumulado_procentaje, 1),
             'plan_acumulado_rebajas': round(plan_acumulado_rebajas, 0),
             'plan_acumulado_rebajas_porcentaje': round(plan_acumulado_rebajas_porcentaje, 1),
             'rebajas_acumulado_desviacion': round(rebajas_acumulado_desviacion, 0),
