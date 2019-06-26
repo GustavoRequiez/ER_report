@@ -264,7 +264,7 @@ msgstr "ISR"
 #. module: ER_report
 #: model:ir.ui.menu,name:ER_report.menu_er_report_wizard
 msgid "Income Statement"
-msgstr "Income Statement"
+msgstr "Estado de Resultados"
 
 #. module: ER_report
 #: selection:er.plan.estado.resultados,name:0
